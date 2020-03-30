@@ -54,12 +54,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdentityModels.cs" />
+    <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="EntityConfigurations\IdentityUserLoginConfiguration.cs" />
+    <Compile Include="EntityConfigurations\IdentityUserRoleConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using BandTogether.MVC.Models;
 using BandTogether.Data;
+using BandTogether.Data.Entities;
 
 namespace BandTogether.MVC
 {

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BandTogether.MVC.Models;
 using BandTogether.Data;
+using BandTogether.Data.Entities;
 
 namespace BandTogether.MVC.Controllers
 {
