@@ -55,9 +55,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\Enumerations\EnsembleTypeEnum.cs" />
+    <Compile Include="Entities\Enumerations\MusicalSkillEnum.cs" />
+    <Compile Include="Entities\Enumerations\InstrumentEnum.cs" />
+    <Compile Include="Entities\Enumerations\TheoryTopicEnum.cs" />
+    <Compile Include="Entities\File\File.cs" />
+    <Compile Include="Entities\File\ImageFile.cs" />
+    <Compile Include="Entities\File\ResourceFile.cs" />
+    <Compile Include="Entities\ResourceClasses\EnsembleResource.cs" />
+    <Compile Include="Entities\ResourceClasses\Resource.cs" />
+    <Compile Include="Entities\ResourceClasses\TechniqueResource.cs" />
+    <Compile Include="Entities\ResourceClasses\TheoryResource.cs" />
+    <Compile Include="Entities\School.cs" />
+    <Compile Include="Entities\Teacher.cs" />
+    <Compile Include="EntityConfigurations\AddressEntityConfig.cs" />
+    <Compile Include="EntityConfigurations\FileEntityConfig.cs" />
     <Compile Include="EntityConfigurations\IdentityUserLoginConfiguration.cs" />
     <Compile Include="EntityConfigurations\IdentityUserRoleConfiguration.cs" />
+    <Compile Include="EntityConfigurations\ResourceEntityConfig.cs" />
+    <Compile Include="EntityConfigurations\SchoolEntityConfig.cs" />
+    <Compile Include="EntityConfigurations\TeacherEntityConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

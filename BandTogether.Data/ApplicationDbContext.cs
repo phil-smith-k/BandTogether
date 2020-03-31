@@ -1,4 +1,6 @@
 ﻿using BandTogether.Data.Entities;
+using BandTogether.Data.Entities.File;
+using BandTogether.Data.Entities.ResourceClasses;
 using BandTogether.Data.EntityConfigurations;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -17,7 +19,16 @@ namespace BandTogether.Data
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-
+        public DbSet<File> Files { get; set; }
+        public DbSet<ImageFile> ImageFiles { get; set; }
+        public DbSet<ResourceFile> ResourceFiles { get; set; }
+        public DbSet<School> Schools { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+        public DbSet<Resource> Resources { get; set; }
+        public DbSet<TechniqueResource> TechniqueResources { get; set; }
+        public DbSet<EnsembleResource> EnsembleResources { get; set; }
+        public DbSet<TheoryResource> TheoryResources { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
