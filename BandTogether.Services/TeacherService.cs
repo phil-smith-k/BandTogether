@@ -22,6 +22,14 @@ namespace BandTogether.Services
         }
         //____________________________________________CREATE
         //______________________________________________READ
+        public IEnumerable<TeacherListItem> GetAllTeachers()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var teachers = ctx.Teachers.ToList();
+                return _teacherHelper.GetTeacherListItems(teachers, _currentUser);
+            }
+        }
         public TeacherDetail GetTeacherById(string teacherId)
         {
             using (var ctx = new ApplicationDbContext())

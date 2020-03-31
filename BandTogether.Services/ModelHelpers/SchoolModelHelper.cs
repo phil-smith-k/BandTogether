@@ -22,5 +22,29 @@ namespace BandTogether.Services.ModelHelpers
 
             return schoolListItems.ToList();
         }
+        public string GetSchoolCity(ICollection<School> schools)
+        {
+            if (schools == null)
+                return "";
+            else if (schools.Count == 0)
+                return "";
+            else
+            {
+                var firstSchool = schools.First();
+                return firstSchool.Address.City;
+            }
+        }
+        public string GetSchoolState(ICollection<School> schools)
+        {
+            if (schools == null)
+                return "";
+            else if (schools.Count == 0)
+                return "";
+            else
+            {
+                var firstSchool = schools.First();
+                return firstSchool.Address.State;
+            }
+        }
     }
 }

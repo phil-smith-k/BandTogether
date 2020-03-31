@@ -8,13 +8,18 @@ using System.Web.Mvc;
 
 namespace BandTogether.MVC.Controllers
 {
+
+    [Authorize]
     public class TeacherController : Controller
     {
         // GET: Teacher
         public ActionResult Index()
         {
-            return View();
+            var service = CreateTeacherService();
+            var teachers = service.GetAllTeachers();
+            return View(teachers);
         }
+
         [HttpGet]
         [Route(Name = "Teacher/Detail/{id}")]
         public ActionResult Detail(string id)

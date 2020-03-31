@@ -61,6 +61,7 @@
     <Compile Include="ResourceModels\TheoryResourceModels\TheoryResourceListItem.cs" />
     <Compile Include="SchoolModels\SchoolListItem.cs" />
     <Compile Include="TeacherModels\TeacherDetail.cs" />
+    <Compile Include="TeacherModels\TeacherListItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

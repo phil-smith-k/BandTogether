@@ -121,5 +121,12 @@ namespace BandTogether.Services.ModelHelpers
                 return theoryListItems;
             }
         }
+        public int GetResourcesCount(ICollection<Resource> resources)
+        {
+            if (resources == null)
+                return 0;
+            else
+                return resources.Count;
+        }
     }
 }

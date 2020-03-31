@@ -31,5 +31,25 @@ namespace BandTogether.Services.ModelHelpers
 
             return new TeacherDetail(entity.Id, entity.FirstName, entity.LastName, fileName, data, followersCount, followingCount, schools, resources);
         }
+        public IEnumerable<TeacherListItem> GetTeacherListItems(List<Teacher> teachers, string currentUser)
+        {
+            var teacherListItems = new List<TeacherListItem>();
+            foreach (var teacher in teachers)
+            {
+                if (teacher.Id == currentUser)
+                    continue;
+                else
+                {
+                    var fullname = $"{teacher.FirstName} {teacher.LastName}";
+                    var city = _schoolHelper.GetSchoolCity(teacher.Schools);
+                    var state = _schoolHelper.GetSchoolState(teacher.Schools);
+                    var followers = GetFollowCount(teacher.Followers);
+                    var resources = _resourceHelper.GetResourcesCount(teacher.Resources);
+
+                    teacherListItems.Add(new TeacherListItem(teacher.Id, fullname, city, state, followers, resources));
+                }
+            }
+            return teacherListItems;
+        }
     }
 }
