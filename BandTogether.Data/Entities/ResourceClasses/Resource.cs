@@ -13,6 +13,7 @@ namespace BandTogether.Data.Entities.ResourceClasses
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTimeOffset DateCreated { get; set; }
+        public DateTimeOffset? DateModified { get; set; }
         public bool IsDownloadable { get; set; }
         public bool IsPublic { get; set; }
         public string TeacherId { get; set; }

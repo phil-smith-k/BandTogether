@@ -8,7 +8,6 @@ namespace BandTogether.Data.Entities.File
 {
     public class ImageFile : File
     {
-        public string TeacherId { get; set; }
         public virtual Teacher Teacher { get; set; }
     }
 }

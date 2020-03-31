@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNet.Identity;
+@using BandTogether.Models.ResourceModels;
+@model BandTogether.Models.TeacherModels.TeacherDetail
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>@Model.FirstName @Model.LastName</h2>
+@if (User.Identity.GetUserId() == Model.TeacherId)
+{
+    @Html.ActionLink("Update Profile", "Edit", new { id = Model.TeacherId })
+}
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfFollowers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfFollowers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfFollowing)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfFollowing)
+        </dd>
+    </dl>
+</div>

@@ -1,6 +1,19 @@
-﻿body {
+﻿/* Global Styling */
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 0.1em;
+}
+
+.navbar-brand {
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+h2 {
+    text-transform: uppercase;
 }
 
 /* Set padding to keep content from hitting the edges */

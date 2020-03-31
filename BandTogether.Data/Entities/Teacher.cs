@@ -12,11 +12,10 @@ namespace BandTogether.Data.Entities
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public int? ImageFileId { get; set; }
         public virtual ImageFile ProfilePicture { get; set; }
-        public ICollection<Resource> Resources { get; set; }
-        public ICollection<Teacher> Followers { get; set; }
-        public ICollection<Teacher> Following { get; set; }
-        public ICollection<School> Schools { get; set; }
+        public virtual ICollection<Resource> Resources { get; set; }
+        public virtual ICollection<Teacher> Followers { get; set; }
+        public virtual ICollection<Teacher> Following { get; set; }
+        public virtual ICollection<School> Schools { get; set; }
     }
 }

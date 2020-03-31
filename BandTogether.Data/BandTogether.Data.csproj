@@ -77,12 +77,21 @@
     <Compile Include="EntityConfigurations\ResourceEntityConfig.cs" />
     <Compile Include="EntityConfigurations\SchoolEntityConfig.cs" />
     <Compile Include="EntityConfigurations\TeacherEntityConfig.cs" />
+    <Compile Include="Migrations\202003311512124_InitialMigration.cs" />
+    <Compile Include="Migrations\202003311512124_InitialMigration.Designer.cs">
+      <DependentUpon>202003311512124_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202003311512124_InitialMigration.resx">
+      <DependentUpon>202003311512124_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -55,10 +55,22 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceModels\EnsembleResourceModels\EnsembleResourceListItem.cs" />
+    <Compile Include="ResourceModels\ResourceListItem.cs" />
+    <Compile Include="ResourceModels\TechniqueResourceModels\TechniqueResourceListItem.cs" />
+    <Compile Include="ResourceModels\TheoryResourceModels\TheoryResourceListItem.cs" />
+    <Compile Include="SchoolModels\SchoolListItem.cs" />
+    <Compile Include="TeacherModels\TeacherDetail.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BandTogether.Data\BandTogether.Data.csproj">
+      <Project>{05137570-C039-4B05-9EE6-75732DACBB97}</Project>
+      <Name>BandTogether.Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

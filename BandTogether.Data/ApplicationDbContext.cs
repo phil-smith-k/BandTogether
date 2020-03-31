@@ -42,7 +42,12 @@ namespace BandTogether.Data
             modelBuilder
                 .Configurations
                 .Add(new IdentityUserLoginConfiguration())
-                .Add(new IdentityUserRoleConfiguration());
+                .Add(new IdentityUserRoleConfiguration())
+                .Add(new AddressEntityConfig())
+                .Add(new FileEntityConfig())
+                .Add(new ResourceEntityConfig())
+                .Add(new SchoolEntityConfig())
+                .Add(new TeacherEntityConfig());
         }
     }
 }

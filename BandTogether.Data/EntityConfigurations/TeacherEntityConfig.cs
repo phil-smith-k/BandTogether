@@ -28,7 +28,7 @@ namespace BandTogether.Data.EntityConfigurations
                 .WithMany(teacher => teacher.Followers)
                 .Map(table => table.ToTable("TeacherFollowJoin")
                 .MapLeftKey("FollowerId")
-                .MapRightKey("FolloweeId"));
+                .MapRightKey("FollowedId"));
 
             //Many Teachers to Many Schools Relationship
             this.HasMany(teacher => teacher.Schools)

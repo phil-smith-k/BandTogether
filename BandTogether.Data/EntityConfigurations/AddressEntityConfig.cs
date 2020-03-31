@@ -12,9 +12,12 @@ namespace BandTogether.Data.EntityConfigurations
     {
         public AddressEntityConfig()
         {
+            //Primary Key
+            this.HasKey(a => a.AddressId);
+
             //Properties
-            this.Property(a => a.StreetAddress).IsRequired().HasMaxLength(800);
-            this.Property(a => a.City).IsRequired().HasMaxLength(800);
+            this.Property(a => a.StreetAddress).IsRequired().HasMaxLength(600);
+            this.Property(a => a.City).IsRequired().HasMaxLength(500);
             this.Property(a => a.State).IsRequired().HasMaxLength(100);
             this.Property(a => a.ZipCode).IsRequired().HasMaxLength(12);
 
