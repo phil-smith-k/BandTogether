@@ -7,9 +7,14 @@
 }
 
 <h2>@Model.FirstName @Model.LastName</h2>
+@foreach (var school in Model.Schools)
+{
+    <p>@school.SchoolName  @school.City  @school.State</p>
+}
+
 @if (User.Identity.GetUserId() == Model.TeacherId)
 {
-    @Html.ActionLink("Update Profile", "Edit", new { id = Model.TeacherId })
+    @Html.ActionLink("Update Profile", "Detail", "EditProfile", new { id = Model.TeacherId }, null)
 }
 <div>
     <hr />
@@ -29,5 +34,47 @@
         <dd>
             @Html.DisplayFor(model => model.NumberOfFollowing)
         </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ResourceCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ResourceCount)
+        </dd>
     </dl>
 </div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Resources.Single().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resources.Single().DateCreated)
+        </th>
+        @if (User.Identity.GetUserId() == Model.TeacherId)
+        {
+        <th>
+            @Html.DisplayNameFor(model => model.Resources.Single().IsPublic)
+        </th>
+        }
+    </tr>
+
+    @foreach (var item in Model.Resources)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Teacher", new { id = item.ResourceId }, null)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            @if(User.Identity.GetUserId() == Model.TeacherId)
+            {
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPublic)
+            </td>
+            }
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,16 @@
+﻿@model BandTogether.Models.TeacherModels.TeacherDetail
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+    <div class="row">
+        <div class="col-lg-3">
+            <h2>@Model.FirstName @Model.LastName</h2>
+        </div>
+        <div class="col-lg-9">
+            @Html.ActionLink("Edit", "EditName", "EditProfile", new { id = Model.TeacherId }, null)
+        </div>
+    </div>
+
+
