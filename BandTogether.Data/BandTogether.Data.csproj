@@ -77,9 +77,13 @@
     <Compile Include="EntityConfigurations\ResourceEntityConfig.cs" />
     <Compile Include="EntityConfigurations\SchoolEntityConfig.cs" />
     <Compile Include="EntityConfigurations\TeacherEntityConfig.cs" />
-    <Compile Include="Migrations\202003311512124_InitialMigration.cs" />
-    <Compile Include="Migrations\202003311512124_InitialMigration.Designer.cs">
-      <DependentUpon>202003311512124_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202004011735588_InitialMigration.cs" />
+    <Compile Include="Migrations\202004011735588_InitialMigration.Designer.cs">
+      <DependentUpon>202004011735588_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202004011835350_AddedContentTypeColumnToFileClass.cs" />
+    <Compile Include="Migrations\202004011835350_AddedContentTypeColumnToFileClass.Designer.cs">
+      <DependentUpon>202004011835350_AddedContentTypeColumnToFileClass.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -89,8 +93,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202003311512124_InitialMigration.resx">
-      <DependentUpon>202003311512124_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202004011735588_InitialMigration.resx">
+      <DependentUpon>202004011735588_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004011835350_AddedContentTypeColumnToFileClass.resx">
+      <DependentUpon>202004011835350_AddedContentTypeColumnToFileClass.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

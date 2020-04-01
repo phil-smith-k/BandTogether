@@ -4,7 +4,7 @@ body {
     padding-top: 50px;
     padding-bottom: 20px;
     font-family: 'Roboto', sans-serif;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
 }
 
 .navbar-brand {
@@ -15,7 +15,17 @@ body {
 h2 {
     text-transform: uppercase;
 }
-
+.empty-profile-pic{
+    background-image: url(~/Assets/noprofilepic.jpg);
+    text-align: center;
+    border: 1px solid black;
+    max-height: 300px;
+    max-width: 250px;
+}
+.profile-pic {
+    max-height: 300px;
+    max-width: 250px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

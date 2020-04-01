@@ -4,9 +4,22 @@
 
 @{
     ViewBag.Title = "Detail";
+    var base64 = Convert.ToBase64String(Model.ImageData);
+    var contentType = Model.ContentType;
+    var imgSrc = String.Format($"data:{contentType};base64,{base64}");
 }
 
 <h2>@Model.FirstName @Model.LastName</h2>
+@if (Model.FileName == "")
+{
+<div class="empty-profile-pic">
+    No Profile Pic
+</div>
+}
+else
+{
+<img src="@imgSrc" alt="@Model.FileName" class="profile-pic" />
+}
 @foreach (var school in Model.Schools)
 {
     <p>@school.SchoolName  @school.City  @school.State</p>
@@ -14,7 +27,9 @@
 
 @if (User.Identity.GetUserId() == Model.TeacherId)
 {
-    @Html.ActionLink("Update Profile", "Detail", "EditProfile", new { id = Model.TeacherId }, null)
+    <div>
+        @Html.ActionLink("Update Profile", "Detail", "EditProfile", new { id = Model.TeacherId }, null)
+    </div>
 }
 <div>
     <hr />

@@ -85,17 +85,18 @@ namespace BandTogether.Data.Migrations
                 "dbo.File",
                 c => new
                     {
-                        FileId = c.Int(nullable: false),
+                        FileId = c.Int(nullable: false, identity: true),
                         FileName = c.String(nullable: false, maxLength: 500),
                         Data = c.Binary(nullable: false),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                         Teacher_Id = c.String(maxLength: 128),
+                        Resource_ResourceId = c.Int(),
                     })
                 .PrimaryKey(t => t.FileId)
                 .ForeignKey("dbo.ApplicationUser", t => t.Teacher_Id)
-                .ForeignKey("dbo.Resource", t => t.FileId)
-                .Index(t => t.FileId)
-                .Index(t => t.Teacher_Id);
+                .ForeignKey("dbo.Resource", t => t.Resource_ResourceId)
+                .Index(t => t.Teacher_Id)
+                .Index(t => t.Resource_ResourceId);
             
             CreateTable(
                 "dbo.Resource",
@@ -185,7 +186,7 @@ namespace BandTogether.Data.Migrations
             DropForeignKey("dbo.TeacherSchoolJoin", "SchoolId", "dbo.School");
             DropForeignKey("dbo.TeacherSchoolJoin", "TeacherId", "dbo.ApplicationUser");
             DropForeignKey("dbo.Resource", "TeacherId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.File", "FileId", "dbo.Resource");
+            DropForeignKey("dbo.File", "Resource_ResourceId", "dbo.Resource");
             DropForeignKey("dbo.File", "Teacher_Id", "dbo.ApplicationUser");
             DropForeignKey("dbo.TeacherFollowJoin", "FollowedId", "dbo.ApplicationUser");
             DropForeignKey("dbo.TeacherFollowJoin", "FollowerId", "dbo.ApplicationUser");
@@ -196,8 +197,8 @@ namespace BandTogether.Data.Migrations
             DropIndex("dbo.IdentityUserRole", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserRole", new[] { "IdentityRole_Id" });
             DropIndex("dbo.Resource", new[] { "TeacherId" });
+            DropIndex("dbo.File", new[] { "Resource_ResourceId" });
             DropIndex("dbo.File", new[] { "Teacher_Id" });
-            DropIndex("dbo.File", new[] { "FileId" });
             DropIndex("dbo.IdentityUserLogin", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.IdentityUserClaim", new[] { "ApplicationUser_Id" });
             DropIndex("dbo.Address", new[] { "AddressId" });

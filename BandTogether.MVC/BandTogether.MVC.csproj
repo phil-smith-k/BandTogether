@@ -240,6 +240,7 @@
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\EditProfile\Detail.cshtml" />
     <Content Include="Views\EditProfile\EditName.cshtml" />
+    <Content Include="Views\EditProfile\EditPicture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

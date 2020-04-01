@@ -11,12 +11,13 @@ namespace BandTogether.Models.TeacherModels
     public class TeacherDetail
     {
         public TeacherDetail() { }
-        public TeacherDetail(string id, string firstName, string lastName, string fileName, byte[] data, int followers, int following, int resourceCount, List<SchoolListItem> schools, List<ResourceListItem> resources)
+        public TeacherDetail(string id, string firstName, string lastName, string fileName, string contentType, byte[] data, int followers, int following, int resourceCount, List<SchoolListItem> schools, List<ResourceListItem> resources)
         {
             this.TeacherId = id;
             this.FirstName = firstName;
             this.LastName = lastName;
             this.FileName = fileName;
+            this.ContentType = contentType;
             this.ImageData = data;
             this.NumberOfFollowers = followers;
             this.NumberOfFollowing = following;
@@ -29,6 +30,7 @@ namespace BandTogether.Models.TeacherModels
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FileName { get; set; }
+        public string ContentType { get; set; }
         public byte[] ImageData { get; set; }
         [Display(Name = "Followers")]
         public int NumberOfFollowers { get; set; }

@@ -15,6 +15,7 @@ namespace BandTogether.Services
         private readonly string _currentUser;
 
         private readonly TeacherModelHelper _teacherHelper = new TeacherModelHelper();
+        private readonly FileModelHelper _fileHelper = new FileModelHelper();
 
         public TeacherService() { }
         public TeacherService(string currentUserId)
@@ -64,6 +65,32 @@ namespace BandTogether.Services
                     entity.LastName = model.LastName;
 
                     return ctx.SaveChanges() == 1;
+                }
+            }
+        }
+        public bool UpdateProfilePicture(EditProfilePicture model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Teachers.Find(model.TeacherId);
+                if (entity == null)
+                    return false;
+                else
+                {
+                    if (entity.ProfilePicture == null)
+                    {
+                        var profilePicture = _fileHelper.BuildProfilePicture(model.Image);
+                        entity.ProfilePicture = profilePicture;
+                        var numberOfChanges = ctx.SaveChanges();
+                        return numberOfChanges == 2;
+                    }
+                    else
+                    {
+                        var updatedPicture = _fileHelper.UpdateProfilePicture(entity.ProfilePicture, model.Image);
+                        entity.ProfilePicture = updatedPicture;
+                        var numberOfChanges = ctx.SaveChanges();
+                        return numberOfChanges == 1;
+                    }
                 }
             }
         }

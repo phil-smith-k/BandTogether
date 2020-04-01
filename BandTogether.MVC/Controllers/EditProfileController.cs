@@ -22,7 +22,7 @@ namespace BandTogether.MVC.Controllers
         }
         [HttpGet]
         [Route(Name = "EditProfile/EditName/{id}")]
-        public ActionResult EditName(string id) 
+        public ActionResult EditName(string id)
         {
             var service = CreateTeacherService();
             var model = service.GetProfileName(id);
@@ -32,15 +32,44 @@ namespace BandTogether.MVC.Controllers
         [Route(Name = "EditProfile/EditName/{id}")]
         public ActionResult EditName(EditProfileName model)
         {
-            var service = CreateTeacherService();
-            if (service.UpdateProfileName(model))
+            if (this.ModelState.IsValid)
             {
-                return RedirectToAction("Detail/{id}");
-            }
-            else
-            {
+                var service = CreateTeacherService();
+                if (service.UpdateProfileName(model))
+                    return RedirectToAction("Detail", new { id = model.TeacherId });
+                else
+                    this.ModelState.AddModelError("", "Profile name could not be updated.");
                 return View(model);
             }
+            else
+                return View(model);
+        }
+
+        [HttpGet]
+        [Route(Name = "EditProfile/EditPicture/{id}")]
+        public ActionResult EditPicture(string id)
+        {
+            return View();
+        }
+        [HttpPost]
+        [Route(Name = "EditProfile/EditPicture/{id}")]
+        public ActionResult EditPicture(EditProfilePicture model)
+        {
+            model.TeacherId = this.User.Identity.GetUserId();
+
+            if (this.ModelState.IsValid && model.Image != null)
+            {
+                var service = CreateTeacherService();
+                if (service.UpdateProfilePicture(model))
+                    return RedirectToAction("Detail", new { id = model.TeacherId });
+                else
+                {
+                    this.ModelState.AddModelError("", "Profile picture could not be updated.");
+                    return View(model);
+                }
+            }
+            else
+                return View(model);
         }
 
         private TeacherService CreateTeacherService()

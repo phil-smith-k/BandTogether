@@ -7,13 +7,13 @@ namespace BandTogether.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.0-30225")]
-    public sealed partial class InitialMigration : IMigrationMetadata
+    public sealed partial class AddedContentTypeColumnToFileClass : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedContentTypeColumnToFileClass));
         
         string IMigrationMetadata.Id
         {
-            get { return "202003311512124_InitialMigration"; }
+            get { return "202004011835350_AddedContentTypeColumnToFileClass"; }
         }
         
         string IMigrationMetadata.Source

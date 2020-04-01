@@ -2,6 +2,9 @@
 
 @{
     ViewBag.Title = "Detail";
+    var base64 = Convert.ToBase64String(Model.ImageData);
+    var contentType = Model.ContentType;
+    var imgSrc = String.Format($"data:{contentType};base64,{base64}");
 }
 
     <div class="row">
@@ -10,6 +13,14 @@
         </div>
         <div class="col-lg-9">
             @Html.ActionLink("Edit", "EditName", "EditProfile", new { id = Model.TeacherId }, null)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <img src="@imgSrc" alt="@Model.FileName" class="profile-pic"/>
+        </div>
+        <div class="col-lg-9">
+            @Html.ActionLink("Edit", "EditPicture", "EditProfile", new { id = Model.TeacherId }, null)
         </div>
     </div>
 

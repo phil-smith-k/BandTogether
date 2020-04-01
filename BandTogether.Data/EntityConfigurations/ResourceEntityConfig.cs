@@ -25,8 +25,9 @@ namespace BandTogether.Data.EntityConfigurations
             this.Property(res => res.TeacherId).IsRequired();
 
             //One Resource to One File Relationship
-            this.HasRequired(res => res.File)
-                .WithRequiredPrincipal(file => file.Resource);
+            this.HasOptional(res => res.File)
+                .WithOptionalPrincipal(file => file.Resource);
+                //.WithRequiredDependent(file => file.Resource);
         }
     }
 }

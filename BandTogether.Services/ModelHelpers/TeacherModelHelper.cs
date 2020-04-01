@@ -1,4 +1,5 @@
 ﻿using BandTogether.Data.Entities;
+using BandTogether.Data.Entities.File;
 using BandTogether.Models.EditProfileModels;
 using BandTogether.Models.TeacherModels;
 using System;
@@ -6,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BandTogether.Services.ModelHelpers
 {
@@ -24,6 +26,7 @@ namespace BandTogether.Services.ModelHelpers
         public TeacherDetail GetTeacherDetailModel(Teacher entity)
         {
             var fileName = _fileHelper.GetFileName(entity.ProfilePicture);
+            var contentType = _fileHelper.GetFileContentType(entity.ProfilePicture);
             var data = _fileHelper.GetFileData(entity.ProfilePicture);
             var schools = _schoolHelper.GetSchoolListItems(entity.Schools);
             var resources = _resourceHelper.GetResourceListItems(entity.Resources);
@@ -31,7 +34,7 @@ namespace BandTogether.Services.ModelHelpers
             var followersCount = GetFollowCount(entity.Followers);
             var followingCount = GetFollowCount(entity.Following);
 
-            return new TeacherDetail(entity.Id, entity.FirstName, entity.LastName, fileName, data, followersCount, followingCount, resourceCount, schools, resources);
+            return new TeacherDetail(entity.Id, entity.FirstName, entity.LastName, fileName, contentType, data, followersCount, followingCount, resourceCount, schools, resources);
         }
         public IEnumerable<TeacherListItem> GetTeacherListItems(List<Teacher> teachers, string currentUser)
         {
