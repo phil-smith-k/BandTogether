@@ -182,6 +182,8 @@
     <Compile Include="Controllers\EditProfileController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\SchoolController.cs" />
     <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -254,10 +256,14 @@
     <Content Include="Views\EditProfile\EditName.cshtml" />
     <Content Include="Views\EditProfile\EditPicture.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Follow.cshtml" />
+    <Content Include="Views\Resource\CreateTechnique.cshtml" />
+    <Content Include="Views\Resource\CreateEnsemble.cshtml" />
+    <Content Include="Views\Resource\CreateTheory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Profile\" />
+    <Folder Include="Views\School\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

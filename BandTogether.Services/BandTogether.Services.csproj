@@ -72,6 +72,8 @@
     <Compile Include="ModelHelpers\SchoolModelHelper.cs" />
     <Compile Include="ModelHelpers\TeacherModelHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceService.cs" />
+    <Compile Include="SchoolService.cs" />
     <Compile Include="TeacherService.cs" />
   </ItemGroup>
   <ItemGroup>

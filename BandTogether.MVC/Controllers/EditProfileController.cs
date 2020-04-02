@@ -38,8 +38,10 @@ namespace BandTogether.MVC.Controllers
                 if (service.UpdateProfileName(model))
                     return RedirectToAction("Detail", new { id = model.TeacherId });
                 else
+                {
                     this.ModelState.AddModelError("", "Profile name could not be updated.");
-                return View(model);
+                    return View(model);
+                }
             }
             else
                 return View(model);

@@ -52,5 +52,16 @@ namespace BandTogether.Services.ModelHelpers
 
             return currentImage;
         }
+        public ResourceFile BuildResourceFile(HttpPostedFileBase file)
+        {
+            var resourceFile = new ResourceFile();
+
+            resourceFile.FileName = file.FileName;
+            resourceFile.ContentType = file.ContentType;
+            resourceFile.Data = new byte[file.ContentLength];
+            file.InputStream.Read(resourceFile.Data, 0, file.ContentLength);
+
+            return resourceFile;
+        }
     }
 }

@@ -69,10 +69,14 @@
   <ItemGroup>
     <Compile Include="EditProfileModels\EditProfileName.cs" />
     <Compile Include="EditProfileModels\EditProfilePicture.cs" />
+    <Compile Include="Interfaces\IResourceCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResourceModels\EnsembleResourceModels\EnsembleCreate.cs" />
     <Compile Include="ResourceModels\EnsembleResourceModels\EnsembleResourceListItem.cs" />
     <Compile Include="ResourceModels\ResourceListItem.cs" />
+    <Compile Include="ResourceModels\TechniqueResourceModels\TechniqueCreate.cs" />
     <Compile Include="ResourceModels\TechniqueResourceModels\TechniqueResourceListItem.cs" />
+    <Compile Include="ResourceModels\TheoryResourceModels\TheoryCreate.cs" />
     <Compile Include="ResourceModels\TheoryResourceModels\TheoryResourceListItem.cs" />
     <Compile Include="SchoolModels\SchoolListItem.cs" />
     <Compile Include="TeacherModels\TeacherDetail.cs" />

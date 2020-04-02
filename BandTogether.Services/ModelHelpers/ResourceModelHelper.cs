@@ -1,4 +1,5 @@
 ﻿using BandTogether.Data.Entities.ResourceClasses;
+using BandTogether.Models.Interfaces;
 using BandTogether.Models.ResourceModels;
 using BandTogether.Models.ResourceModels.EnsembleResourceModels;
 using BandTogether.Models.ResourceModels.TechniqueResourceModels;
@@ -13,6 +14,8 @@ namespace BandTogether.Services.ModelHelpers
 {
     public class ResourceModelHelper
     {
+        private readonly FileModelHelper _fileHelper = new FileModelHelper();
+
         public List<ResourceListItem> GetResourceListItems(ICollection<Resource> resources)
         {
             if (resources == null)
@@ -127,6 +130,75 @@ namespace BandTogether.Services.ModelHelpers
                 return 0;
             else
                 return resources.Count;
+        }
+        public Resource BuildResourceEntity(IResourceCreate model)
+        {
+            if (model is TechniqueCreate)
+            {
+                var techniqueResource = BuildTechniqueResource(model as TechniqueCreate);
+                return techniqueResource;
+            }
+            else if (model is EnsembleCreate)
+            {
+                var ensembleResource = BuildEnsembleResource(model as EnsembleCreate);
+                return ensembleResource;
+            }
+            else
+            {
+                var theoryResource = BuildTheoryResource(model as TheoryCreate);
+                return theoryResource;
+            }
+        }
+
+        private EnsembleResource BuildEnsembleResource(EnsembleCreate model)
+        {
+            var entity = new EnsembleResource();
+
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.DateCreated = DateTimeOffset.Now;
+            entity.IsDownloadable = model.IsDownloadable;
+            entity.IsPublic = model.IsPublic;
+            entity.TeacherId = model.TeacherId;
+            entity.File = _fileHelper.BuildResourceFile(model.File);
+            entity.Ensemble = model.Ensemble;
+            entity.Skill = model.Skill;
+            entity.GradeLevel = model.GradeLevel;
+
+            return entity;
+        }
+        private TechniqueResource BuildTechniqueResource(TechniqueCreate model)
+        {
+            var entity = new TechniqueResource();
+
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.DateCreated = DateTimeOffset.Now;
+            entity.IsDownloadable = model.IsDownloadable;
+            entity.IsPublic = model.IsPublic;
+            entity.TeacherId = model.TeacherId;
+            entity.File = _fileHelper.BuildResourceFile(model.File);
+            entity.Instrument = model.Instrument;
+            entity.Skill = model.Skill;
+            entity.GradeLevel = model.GradeLevel;
+
+            return entity;
+        }
+        private TheoryResource BuildTheoryResource(TheoryCreate model)
+        {
+            var entity = new TheoryResource();
+
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.DateCreated = DateTimeOffset.Now;
+            entity.IsDownloadable = model.IsDownloadable;
+            entity.IsPublic = model.IsPublic;
+            entity.TeacherId = model.TeacherId;
+            entity.File = _fileHelper.BuildResourceFile(model.File);
+            entity.Topic = model.Topic;
+            entity.GradeLevel = model.GradeLevel;
+
+            return entity;
         }
     }
 }
