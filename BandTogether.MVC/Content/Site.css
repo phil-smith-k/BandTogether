@@ -15,16 +15,23 @@ body {
 h2 {
     text-transform: uppercase;
 }
-.empty-profile-pic{
-    background-image: url(~/Assets/noprofilepic.jpg);
-    text-align: center;
-    border: 1px solid black;
-    max-height: 300px;
-    max-width: 250px;
+.empty-profile-pic {
+    content: url('../Assets/noprofilepic.jpg');
+    border: 2px solid black;
+    max-height: 250px;
+    max-width: 200px;
+}
+.glyphicon-plus {
+    font-size: 1.5em;
+    color: green;
+}
+.glyphicon-minus {
+    font-size: 1.5em;
+    color: red;
 }
 .profile-pic {
-    max-height: 300px;
-    max-width: 250px;
+    max-height: 250px;
+    max-width: 200px;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {

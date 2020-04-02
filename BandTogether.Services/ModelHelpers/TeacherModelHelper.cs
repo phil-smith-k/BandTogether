@@ -36,12 +36,12 @@ namespace BandTogether.Services.ModelHelpers
 
             return new TeacherDetail(entity.Id, entity.FirstName, entity.LastName, fileName, contentType, data, followersCount, followingCount, resourceCount, schools, resources);
         }
-        public IEnumerable<TeacherListItem> GetTeacherListItems(List<Teacher> teachers, string currentUser)
+        public IEnumerable<TeacherListItem> GetTeacherListItems(List<Teacher> teachers, Teacher currentUser)
         {
             var teacherListItems = new List<TeacherListItem>();
             foreach (var teacher in teachers)
             {
-                if (teacher.Id == currentUser)
+                if (teacher.Id == currentUser.Id)
                     continue;
                 else
                 {
@@ -50,8 +50,9 @@ namespace BandTogether.Services.ModelHelpers
                     var state = _schoolHelper.GetSchoolState(teacher.Schools);
                     var followers = GetFollowCount(teacher.Followers);
                     var resources = _resourceHelper.GetResourcesCount(teacher.Resources);
+                    var isFollowed = currentUser.Following.Contains(teacher);
 
-                    teacherListItems.Add(new TeacherListItem(teacher.Id, fullname, city, state, followers, resources));
+                    teacherListItems.Add(new TeacherListItem(teacher.Id, fullname, city, state, followers, resources, isFollowed));
                 }
             }
             return teacherListItems;

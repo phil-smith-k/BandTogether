@@ -1,0 +1,7 @@
+﻿@model bool
+
+<span>
+    <i class="follow-icon glyphicon @(Model ? "glyphicon-minus" : "glyphicon-plus")"
+       data-toggle="follow"
+       data-id="@ViewBag.Id"></i>
+</span>

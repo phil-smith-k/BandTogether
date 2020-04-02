@@ -29,7 +29,8 @@ namespace BandTogether.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var teachers = ctx.Teachers.ToList();
-                return _teacherHelper.GetTeacherListItems(teachers, _currentUser);
+                var currentUser = ctx.Teachers.Find(_currentUser);
+                return _teacherHelper.GetTeacherListItems(teachers, currentUser);
             }
         }
         public TeacherDetail GetTeacherById(string teacherId)
@@ -92,6 +93,38 @@ namespace BandTogether.Services
                         return numberOfChanges == 1;
                     }
                 }
+            }
+        }
+        public bool AddTeacherToFollowing(string teacherId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var currentUser = ctx.Teachers.Find(_currentUser);
+                var teacherToAdd = ctx.Teachers.Find(teacherId);
+
+                if (currentUser != null && teacherToAdd != null)
+                {
+                    currentUser.Following.Add(teacherToAdd);
+                    return ctx.SaveChanges() == 1;
+                }
+                else
+                    return false;
+            }
+        }
+        public bool RemoveTeacherFromFollowing(string teacherId)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var currentUser = ctx.Teachers.Find(_currentUser);
+                var teacherToRemove = ctx.Teachers.Find(teacherId);
+
+                if (currentUser != null && teacherToRemove != null)
+                {
+                    currentUser.Following.Remove(teacherToRemove);
+                    return ctx.SaveChanges() == 1;
+                }
+                else
+                    return false;
             }
         }
         //____________________________________________DELETE
