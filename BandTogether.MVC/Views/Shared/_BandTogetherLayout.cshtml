@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Band - Together</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <nav id="nav" class="navbar fixed-top navbar-light bg-light navbar-fixed-top navbar-expand-sm col-12">
+        <!-- Brand/Title -->
+        <div class="navbar-brand">
+            <img src="~/Assets/eightnote.png" class="nav-logo align-middle" alt="brand logo">
+            <a><h1 class="align-middle font-weight-bold">Band-Together</h1></a>
+        </div>
+        <!-- Navigation Menu -->
+        @Html.Partial("_LoginPartial")
+
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer class="footer navbar-fixed-bottom">
+        <img src="~/Assets/eightnote.png" class="nav-logo pull-right" alt="" />
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

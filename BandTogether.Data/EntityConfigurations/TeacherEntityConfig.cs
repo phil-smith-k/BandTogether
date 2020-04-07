@@ -30,12 +30,11 @@ namespace BandTogether.Data.EntityConfigurations
                 .MapLeftKey("FollowerId")
                 .MapRightKey("FollowedId"));
 
-            //Many Teachers to Many Schools Relationship
+            //Many Schools to Zero or One Teacher Relationship 
             this.HasMany(teacher => teacher.Schools)
-                .WithMany(school => school.Teachers)
-                .Map(table => table.ToTable("TeacherSchoolJoin")
-                .MapLeftKey("TeacherId")
-                .MapRightKey("SchoolId"));
+                .WithOptional(school => school.Teacher)
+                .HasForeignKey(school => school.TeacherId);
+
 
             //One Teacher to Many Resources Relationship
             this.HasMany(teacher => teacher.Resources)

@@ -67,6 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FileService.cs" />
+    <Compile Include="ModelHelpers\AddressModelHelper.cs" />
     <Compile Include="ModelHelpers\FileModelHelper.cs" />
     <Compile Include="ModelHelpers\ResourceModelHelper.cs" />
     <Compile Include="ModelHelpers\SchoolModelHelper.cs" />

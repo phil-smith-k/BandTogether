@@ -13,6 +13,7 @@ namespace BandTogether.Data.Entities
         public int LowestGrade { get; set; }
         public int HighestGrade { get; set; }
         public virtual Address Address { get; set; }
-        public ICollection<Teacher> Teachers { get; set; }
+        public string TeacherId { get; set; }
+        public Teacher Teacher { get; set; }
     }
 }

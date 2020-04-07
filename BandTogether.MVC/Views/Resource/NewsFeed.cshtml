@@ -1,0 +1,38 @@
+﻿@model IEnumerable<BandTogether.Models.ResourceModels.ResourceListItem>
+
+@{
+    ViewBag.Title = "NewsFeed";
+}
+
+<h2>News Feed</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TeacherName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher",new {id = item.TeacherId}, null)
+        </td>
+        <td>
+            @Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+    </tr>
+}
+</table>

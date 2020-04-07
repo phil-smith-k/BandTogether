@@ -9,55 +9,49 @@
     var imgSrc = String.Format($"data:{contentType};base64,{base64}");
 }
 
-<h2>@Model.FirstName @Model.LastName</h2>
+@if (User.Identity.GetUserId() == Model.TeacherId)
+{
+    <button class="pull-right btn">
+        @Html.ActionLink("Update Profile", "Detail", "EditProfile", new { id = Model.TeacherId }, null)
+    </button>
+}
+<div class="follow-count">
+    <dl>
+        <dt>
+            @Html.DisplayNameFor(model => model.ResourceCount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ResourceCount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfFollowers)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfFollowers)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NumberOfFollowing)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NumberOfFollowing)
+        </dd>
+    </dl>
+</div>
+<div class="profile-pic">
 @if (Model.FileName == "")
 {
-<div class="empty-profile-pic">
-
-</div>
+    <img src="~/Assets/noprofilepic.jpg" alt="no profile picture" />
 }
 else
 {
-<img src="@imgSrc" alt="@Model.FileName" class="profile-pic" />
+<img src="@imgSrc" alt="@Model.FileName" class="" />
 }
+</div>
+<h2>@Model.FirstName @Model.LastName</h2>
 @foreach (var school in Model.Schools)
 {
     <p>@school.SchoolName  @school.City  @school.State</p>
 }
-
-@if (User.Identity.GetUserId() == Model.TeacherId)
-{
-    <div>
-        @Html.ActionLink("Update Profile", "Detail", "EditProfile", new { id = Model.TeacherId }, null)
-    </div>
-}
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NumberOfFollowers)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumberOfFollowers)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NumberOfFollowing)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NumberOfFollowing)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ResourceCount)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.ResourceCount)
-        </dd>
-    </dl>
-</div>
 <table class="table">
     <tr>
         <th>
@@ -78,7 +72,7 @@ else
     {
         <tr>
             <td>
-                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Teacher", new { id = item.ResourceId }, null)
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateCreated)

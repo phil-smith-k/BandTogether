@@ -10,6 +10,8 @@ namespace BandTogether.Services.ModelHelpers
 {
     public class SchoolModelHelper
     {
+        private readonly AddressModelHelper _addressHelper = new AddressModelHelper();
+
         public List<SchoolListItem> GetSchoolListItems(ICollection<School> schools)
         {
             var schoolListItems = schools.Select(sch => new SchoolListItem
@@ -45,6 +47,18 @@ namespace BandTogether.Services.ModelHelpers
                 var firstSchool = schools.First();
                 return firstSchool.Address.State;
             }
+        }
+        public School BuildSchoolEntity(SchoolCreate model)
+        {
+            var entity = new School();
+
+            entity.SchoolName = model.SchoolName;
+            entity.Address = _addressHelper.BuildAddress(model);
+            entity.LowestGrade = model.LowestGradeLevel;
+            entity.HighestGrade = model.HighestGradeLevel;
+            entity.TeacherId = model.TeacherId;
+
+            return entity;
         }
     }
 }

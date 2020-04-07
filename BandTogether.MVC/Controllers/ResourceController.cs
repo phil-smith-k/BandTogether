@@ -14,11 +14,13 @@ namespace BandTogether.MVC.Controllers
     [Authorize]
     public class ResourceController : Controller
     {
-        // GET: Resource
-        public ActionResult Index()
+        public ActionResult NewsFeed()
         {
-            return View();
+            var service = CreateResourceService();
+            var model = service.GetPublicFollowedResources();
+            return View(model);
         }
+
         [HttpGet]
         public ActionResult CreateTechnique()
         {
@@ -101,11 +103,44 @@ namespace BandTogether.MVC.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult Detail(int id)
+        {
+            var service = CreateResourceService();
+            var model = service.GetResourceById(id);
+
+            if (model is TechniqueDetail)
+                return View("TechniqueDetail", model);
+            else if (model is EnsembleDetail)
+                return View("EnsembleDetail", model);
+            else
+                return View("TheoryDetail", model);
+        }
+
+        [HttpGet]
+        public ActionResult Download(int id)
+        {
+            var service = CreateFileService();
+            var file = service.GetFileById(id);
+
+            var cd = new System.Net.Mime.ContentDisposition
+            {
+                FileName = file.FileName,
+                Inline = false,
+            };
+            Response.AppendHeader("Content-Disposition", cd.ToString());
+            return File(file.Data, file.ContentType);
+        }
 
         private ResourceService CreateResourceService()
         {
             var userId = this.User.Identity.GetUserId();
             return new ResourceService(userId);
+        }
+        private FileService CreateFileService()
+        {
+            var userId = this.User.Identity.GetUserId();
+            return new FileService(userId);
         }
     }
 }

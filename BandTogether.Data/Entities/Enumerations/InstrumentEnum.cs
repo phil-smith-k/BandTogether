@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,14 +11,22 @@ namespace BandTogether.Data.Entities
     { 
         Piccolo = 1,
         Flute, 
-        Oboe, 
+        Oboe,
+        [Display(Name = "English Horn")]
         EnglishHorn, 
-        Bassoon, 
-        Clarinet, 
-        BassClarinet, 
-        SopranoSaxophone, 
-        AltoSaxophone, 
-        TenorSaxophone, 
+        Bassoon,
+        [Display(Name = "Eb Clarinet")]
+        EbClarinet,
+        Clarinet,
+        [Display(Name = "Bass Clarinet")]
+        BassClarinet,
+        [Display(Name = "Soprano Saxophone")]
+        SopranoSaxophone,
+        [Display(Name = "Alto Saxophone")]
+        AltoSaxophone,
+        [Display(Name = "Tenor Saxophone")]
+        TenorSaxophone,
+        [Display(Name = "Bari Saxophone")]
         BariSaxophone, 
         Horn,
         Mellophone,
@@ -25,18 +34,23 @@ namespace BandTogether.Data.Entities
         Trombone, 
         Euphonium, 
         Baritone, 
-        Tuba, 
+        Tuba,
+        [Display(Name = "Snare Drum")]
         SnareDrum, 
         Bells, 
         Xylophone, 
         Vibraphone, 
         Marimba, 
-        Timpani, 
-        TenorDrums, 
+        Timpani,
+        [Display(Name = "Tenor Drum")]
+        TenorDrums,
+        [Display(Name = "Bass Drum")]
         BassDrum, 
         Cymbals, 
-        Guitar, 
-        ElectricBass, 
+        Guitar,
+        [Display(Name = "Electric Bass")]
+        ElectricBass,
+        [Display(Name = "String Bass")]
         StringBass, 
         DrumSet, 
         Piano 

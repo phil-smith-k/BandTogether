@@ -1,49 +1,51 @@
-﻿@model BandTogether.Models.TeacherModels.TeacherDetail
+﻿@using BandTogether.Models.SchoolModels;
+@model BandTogether.Models.TeacherModels.TeacherDetail
 
 @{
     ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_BandTogetherLayout.cshtml";
     var base64 = Convert.ToBase64String(Model.ImageData);
     var contentType = Model.ContentType;
     var imgSrc = String.Format($"data:{contentType};base64,{base64}");
 }
 
-    
+
 <div class="">
     <h2>@Model.FirstName @Model.LastName</h2>
 </div>
 <div class="">
     @Html.ActionLink("Edit", "EditName", "EditProfile", new { id = Model.TeacherId }, null)
 </div>
-    
-    
+
+
+    <div class="profile-pic">
 @if (Model.FileName == "")
 {
-    <div class="empty-profile-pic">
-
-    </div>
+        <img src="~/Assets/noprofilepic.jpg" alt="" />
 }
 else
 {
     <img src="@imgSrc" alt="@Model.FileName" class="profile-pic" />
 }
+    </div>
 <div class="">
     @Html.ActionLink("Edit", "EditPicture", "EditProfile", new { id = Model.TeacherId }, null)
 </div>
-    
+
 @if (Model.Schools.Count != 0)
 {
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Schools.Single().SchoolName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Schools.Single().City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Schools.Single().State)
-        </th>
-    </tr>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Schools.Single().SchoolName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schools.Single().City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schools.Single().State)
+            </th>
+        </tr>
         @foreach (var item in Model.Schools)
         {
             <tr>
@@ -62,13 +64,30 @@ else
                 </td>
             </tr>
         }
-</table>
+    </table>
 }
 else
 {
-<div>You have not added any schools.</div>
+    <p>You have not added any schools.</p>
 }
-@Html.ActionLink("Add School", "Create", "School")
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create-school">Add School</button>
+<div class="modal" id="create-school" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @{Html.RenderPartial("CreateSchool", new SchoolCreate());}
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
 
 

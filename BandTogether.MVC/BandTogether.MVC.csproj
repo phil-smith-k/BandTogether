@@ -194,6 +194,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\eightnote.png" />
+    <Content Include="Assets\foreground lines in crop.png" />
     <Content Include="Assets\noprofilepic.jpg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -259,6 +261,12 @@
     <Content Include="Views\Resource\CreateTechnique.cshtml" />
     <Content Include="Views\Resource\CreateEnsemble.cshtml" />
     <Content Include="Views\Resource\CreateTheory.cshtml" />
+    <Content Include="Views\Resource\TechniqueDetail.cshtml" />
+    <Content Include="Views\Resource\EnsembleDetail.cshtml" />
+    <Content Include="Views\Resource\TheoryDetail.cshtml" />
+    <Content Include="Views\Resource\NewsFeed.cshtml" />
+    <Content Include="Views\Shared\_BandTogetherLayout.cshtml" />
+    <Content Include="Views\Shared\CreateSchool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

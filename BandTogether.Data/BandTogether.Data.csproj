@@ -97,6 +97,10 @@
     <Compile Include="Migrations\202004011835350_AddedContentTypeColumnToFileClass.Designer.cs">
       <DependentUpon>202004011835350_AddedContentTypeColumnToFileClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202004061530167_ChangedSchoolToTeacherRelationshipToOneToMany.cs" />
+    <Compile Include="Migrations\202004061530167_ChangedSchoolToTeacherRelationshipToOneToMany.Designer.cs">
+      <DependentUpon>202004061530167_ChangedSchoolToTeacherRelationshipToOneToMany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202004011835350_AddedContentTypeColumnToFileClass.resx">
       <DependentUpon>202004011835350_AddedContentTypeColumnToFileClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202004061530167_ChangedSchoolToTeacherRelationshipToOneToMany.resx">
+      <DependentUpon>202004061530167_ChangedSchoolToTeacherRelationshipToOneToMany.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

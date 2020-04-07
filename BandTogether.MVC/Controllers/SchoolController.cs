@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BandTogether.Models.SchoolModels;
+using BandTogether.Services;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,10 +11,39 @@ namespace BandTogether.MVC.Controllers
 {
     public class SchoolController : Controller
     {
-        // GET: School
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult AddSchool(SchoolCreate model)
         {
-            return View();
+            if (this.ModelState.IsValid)
+            {
+                var service = CreateSchoolService();
+                if (service.AddSchoolToTeacher(model))
+                {
+                    return RedirectToAction("Detail", "EditProfile", new { id = this.User.Identity.GetUserId() });
+                }
+                else
+                {
+                    return Json(new
+                    {
+                        status = "failure",
+                        formErrors = this.ModelState.Select(kvp => new { key = kvp.Key, errors = kvp.Value.Errors.Select(e => e.ErrorMessage) })
+                    });
+                }
+            }
+            else
+            {
+                return Json(new
+                {
+                    status = "failure",
+                    formErrors= this.ModelState.Select(kvp => new { key = kvp.Key, errors = kvp.Value.Errors.Select(e => e.ErrorMessage)})
+                });
+            }
+
+        }
+        private SchoolService CreateSchoolService()
+        {
+            var userId = this.User.Identity.GetUserId();
+            return new SchoolService(userId);
         }
     }
 }

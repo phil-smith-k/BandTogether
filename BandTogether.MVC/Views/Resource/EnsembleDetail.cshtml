@@ -1,0 +1,79 @@
+﻿@model BandTogether.Models.ResourceModels.EnsembleResourceModels.EnsembleDetail
+
+@{
+    ViewBag.Title = "EnsembleDetail";
+}
+
+<h2>EnsembleDetail</h2>
+
+<div>
+    <h4>EnsembleDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateModified)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Skill)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Skill)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ensemble)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ensemble)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradeLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradeLevel)
+        </dd>
+
+    </dl>
+</div>
+@if (Model.IsDownloadable)
+{
+    <p>
+        @Html.ActionLink("Download Now", "Download", new { id = Model.FileId })
+    </p>
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

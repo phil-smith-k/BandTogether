@@ -1,0 +1,72 @@
+﻿@model BandTogether.Models.ResourceModels.TheoryResourceModels.TheoryDetail
+
+@{
+    ViewBag.Title = "TheoryDetail";
+}
+
+<h2>TheoryDetail</h2>
+
+<div>
+    <h4>TheoryDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateModified)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateModified)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GradeLevel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GradeLevel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Topic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Topic)
+        </dd>
+
+    </dl>
+</div>
+@if (Model.IsDownloadable)
+{
+    <p>
+        @Html.ActionLink("Download Now", "Download", new { id = Model.FileId })
+    </p>
+}
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

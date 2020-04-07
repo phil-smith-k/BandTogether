@@ -1,4 +1,5 @@
 ﻿using BandTogether.Data.Entities.File;
+using BandTogether.Models.FileModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,6 +63,10 @@ namespace BandTogether.Services.ModelHelpers
             file.InputStream.Read(resourceFile.Data, 0, file.ContentLength);
 
             return resourceFile;
+        }
+        public ResourceFileDetail BuildResourceFileDetail(File entity)
+        {
+            return new ResourceFileDetail(entity.FileName, entity.ContentType, entity.Data);
         }
     }
 }

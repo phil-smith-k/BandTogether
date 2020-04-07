@@ -1,5 +1,7 @@
 ﻿using BandTogether.Data;
+using BandTogether.Data.Entities.ResourceClasses;
 using BandTogether.Models.Interfaces;
+using BandTogether.Models.ResourceModels;
 using BandTogether.Models.ResourceModels.TechniqueResourceModels;
 using BandTogether.Services.ModelHelpers;
 using System;
@@ -15,7 +17,6 @@ namespace BandTogether.Services
         private readonly string _currentUser;
 
         private readonly ResourceModelHelper _resourceHelper = new ResourceModelHelper();
-
 
         public ResourceService() { }
         public ResourceService(string currentUserId)
@@ -41,6 +42,39 @@ namespace BandTogether.Services
             }
         }
         //______________________________________________READ
+        public IEnumerable<ResourceListItem> GetPublicFollowedResources()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var teacher = ctx.Teachers.Find(_currentUser);
+                if (teacher != null)
+                {
+                    var followingIds = teacher.Following.Select(t => t.Id);
+                    var resources = ctx.Resources.ToList();
+
+                    var publicResources = resources.Where(res => followingIds.Contains(res.TeacherId) && res.IsPublic).OrderByDescending(res => res.DateCreated).ToList();
+
+                    return _resourceHelper.GetResourceListItems(publicResources);
+                }
+                else
+                    throw new InvalidOperationException();
+            }
+        }
+        public IResourceDetail GetResourceById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Resources.Find(id);
+
+                if (entity != null)
+                {
+                    var model = _resourceHelper.BuildResourceDetail(entity);
+                    return model;
+                }
+                else
+                    throw new InvalidOperationException();
+            }
+        }
         //____________________________________________UPDATE
         //____________________________________________DELETE
     }
