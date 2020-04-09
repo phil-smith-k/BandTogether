@@ -1,7 +1,10 @@
 ﻿@model bool
-
+@{ 
+    var follow = "follow";
+    var unfollow = "unfollow";
+}
 <span>
-    <i class="follow-icon glyphicon @(Model ? "glyphicon-minus" : "glyphicon-plus")"
+    <a class="btn follow-icon @(@Model ? "unfollow-btn" : "follow-btn")"
        data-toggle="follow"
-       data-id="@ViewBag.Id"></i>
+       data-id="@ViewBag.Id">@(@Model ? unfollow : follow)</a>
 </span>

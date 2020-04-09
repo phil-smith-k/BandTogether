@@ -14,10 +14,10 @@
     <h2>@Model.FirstName @Model.LastName</h2>
 </div>
 <div class="">
-    @Html.ActionLink("Edit", "EditName", "EditProfile", new { id = Model.TeacherId }, null)
+    @Html.ActionLink("Update Your Name", "EditName", "EditProfile", new { id = Model.TeacherId }, new { @class = "btn btn-primary" })
 </div>
 
-
+<hr />
     <div class="profile-pic">
 @if (Model.FileName == "")
 {
@@ -29,42 +29,26 @@ else
 }
     </div>
 <div class="">
-    @Html.ActionLink("Edit", "EditPicture", "EditProfile", new { id = Model.TeacherId }, null)
+    @Html.ActionLink("Update Your Profile Picture", "EditPicture", "EditProfile", new { id = Model.TeacherId }, new { @class = "btn btn-primary" })
 </div>
-
+<hr />
 @if (Model.Schools.Count != 0)
 {
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Schools.Single().SchoolName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Schools.Single().City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Schools.Single().State)
-            </th>
-        </tr>
+    <ul class="list-group">
         @foreach (var item in Model.Schools)
         {
-            <tr>
-                <td>
-                    @Html.ActionLink(@Html.DisplayFor(modelItem => item.SchoolName).ToHtmlString(), "Detail", "Teacher", null, null)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.State)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", "School") |
-                    @Html.ActionLink("Delete", "Delete", "School")
-                </td>
-            </tr>
+        <li class="list-group-item">
+            @Html.DisplayFor(modelItem => item.SchoolName) -
+
+            @Html.DisplayFor(modelItem => item.City),
+
+            @Html.DisplayFor(modelItem => item.State) -
+
+            @Html.ActionLink("Edit", "Edit", "School") |
+            @Html.ActionLink("Delete", "Delete", "School")
+        </li>
         }
-    </table>
+    </ul>
 }
 else
 {

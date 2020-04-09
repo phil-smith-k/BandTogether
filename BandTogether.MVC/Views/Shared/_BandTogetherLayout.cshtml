@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Band - Together</title>
+    <title>Band Together</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -12,17 +12,19 @@
         <!-- Brand/Title -->
         <div class="navbar-brand">
             <img src="~/Assets/eightnote.png" class="nav-logo align-middle" alt="brand logo">
-            <a><h1 class="align-middle font-weight-bold">Band-Together</h1></a>
+            <a><h1 class="align-middle font-weight-bold">BandTogether</h1></a>
         </div>
         <!-- Navigation Menu -->
         @Html.Partial("_LoginPartial")
-
+        
     </nav>
     <div class="container body-content">
         @RenderBody()
     </div>
-    <footer class="footer navbar-fixed-bottom">
-        <img src="~/Assets/eightnote.png" class="nav-logo pull-right" alt="" />
+    <footer class="container-fluid">
+        <nav class="navbar fixed-bottom">
+            <div class="ml-auto"><img src="~/Assets/eightnote.png" class="nav-logo" alt="" /></div>
+        </nav>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")

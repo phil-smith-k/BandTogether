@@ -4,35 +4,55 @@
     ViewBag.Title = "NewsFeed";
 }
 
-<h2>News Feed</h2>
+    <div class="d-flex flex-row justify-content-between">
+<h2 class="flex-fill">News Feed</h2>
+<input type="text" id="search-bar" class="flex-fill" placeholder="Search your feed...">
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TeacherName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </th>
-    </tr>
+    </div>
+    <hr />
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher",new {id = item.TeacherId}, null)
-        </td>
-        <td>
-            @Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
-        </td>
-    </tr>
+<div class="card-columns">
+    @foreach (var item in Model)
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5 class="">@Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = item.TeacherId }, null)</h5>
+            </div>
+            <div class="card-body">
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)
+            </div>
+            <div class="card-footer">
+                <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+            </div>
+        </div>
+    }
+
+
+
+
+</div>
+@section scripts{
+
+    <script>
+        const search = document.getElementById("search-bar");
+        const cards = document.querySelectorAll(".card");
+        search.addEventListener("keyup", function () {
+            var searchText = search.value.toUpperCase();
+            for (i = 0; i < cards.length; i++) {
+                var elements = cards[i].children;
+                for (j = 0; j < elements.length; j++) {
+                    var currentElement = elements[j];
+                    var text = currentElement.textContent.toUpperCase();
+                    if (text.includes(searchText)) {
+                        currentElement.parentElement.style.display = "";
+                        break;
+                    }
+                    else {
+                        currentElement.parentElement.style.display = "none";
+                        continue;
+                    }
+                }
+            }
+        });
+    </script>
 }
-</table>

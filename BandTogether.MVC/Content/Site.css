@@ -1,10 +1,12 @@
 ﻿/* Global Styling */
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital@1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gotu&display=swap');
 body {
     padding-top: 75px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     letter-spacing: 0.06em;
+    background-color: #ffffff;
 }
 .footer{
     height: 70px;
@@ -15,32 +17,42 @@ body {
     width: 100%;
     height: 1em;
 }
-a:hover {
+/*a:hover {
     text-decoration: none;
-    background-color: white !important;
-}
-a {
+    background-color: #3d59a8 !important;
     color: #616771 !important;
-}
+}*/
 form {
     max-width: 400px;
 }
 h2 {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Gotu', sans-serif;
     color: #616771;
 }
-.glyphicon-plus {
-    font-size: 1.5em;
-    color: green;
+.follow-btn {
+    width: 100px;
+    background-color: #3d59a8;
+    color: white !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 18px;
 }
-
-.glyphicon-minus {
-    font-size: 1.5em;
-    color: red;
+.follow-btn:hover {
+    background-color: rgba(61, 89, 168, 0.8)
 }
-.profile-pic {
-    margin-top: 2em;
-    margin-bottom: 2em;
+.unfollow-btn {
+    background-color: white;
+    border: 1px solid #3d59a8;
+    width: 100px;
+    color: #3d59a8 !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 20px;
+}
+.unfollow-btn:hover {
+    border: 1px solid rgba(61, 89, 168, 0.3);
+    background-color: rgba(61, 89, 168, 0.3);
+    color: white !important;
 }
 .profile-pic > img {
     border-radius: 50%;
@@ -55,12 +67,10 @@ h2 {
     padding-right: 15px;
     padding-top: 1em;
     margin-top: 50px;
-    border-top: 4px solid #616771;
-    border-left: 4px solid #616771;
 }
-.follow-count {
+.follow-header {
     margin-top: 1em;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 1.4em;
     color: #616771;
 }
@@ -88,7 +98,7 @@ textarea {
 /*NavBar Styling*/
 #nav {
     height: 80px;
-    background-color: #f5f5f5;
+    background-color: #3d59a8;
     margin-bottom: 0;
 }
 .navbar-brand {
@@ -96,23 +106,23 @@ textarea {
 }
 .navbar-brand > img {
     float: left;
-    margin-top: 0.7em;
-    margin-left: 2.5em;
+    margin-top: .5em;
+    margin-left: 2.0em;
 }
 #nav h1 {
     color: #3d59a8;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Gotu', sans-serif;
     text-emphasis: none;
-    text-transform: uppercase;
     letter-spacing: 0.15em;
-    margin-top: 0.5em;
+    margin-top: 0.25em;
     margin-left: 0.5em;
     float: right;
     display: inline-block;
 }
 .navbar-nav{
     font-size: 20px;
-    margin-right: 3em;
+    width: 500px;
+    margin-right: 0em;
     margin-top: 0.7em;
 }
 
@@ -131,4 +141,23 @@ textarea {
 .nav-logo {
     width: 45px;
     height: 45px;
-}   
+}
+.card-header{
+    background-color: white;
+    border-bottom: none;
+}
+.card-footer{
+    font-size: 10px;
+    background-color: white;
+    border-top: none;
+}
+#search-bar{
+    border-radius: 15px;
+    border: 1px solid lightgray;
+    width: 100%;
+    padding-left: 1em;
+    margin-bottom: 1em;
+}
+#teachers{
+    transition: display linear 2s;
+}

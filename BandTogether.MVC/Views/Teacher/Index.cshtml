@@ -2,31 +2,16 @@
 
 @{
     ViewBag.Title = "Index";
+    var resource = "resource";
 }
 
-<h2>Find Teachers</h2>
+<div class="d-flex flex-row justify-content-between">
+    <h2 class="flex-fill">Find Teachers</h2>
+    <input type="text" id="search-bar" class="flex-fill" placeholder="Find Teachers...">
 
-<table class="table">
-    @*<tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TeacherName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.City)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.State)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FollowerCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ResourceCount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsFollowed)
-        </th>
-    </tr>*@
+</div>
+<hr />
+<table id="teachers" class="table table-striped">
 
     @foreach (var item in Model)
     {
@@ -36,19 +21,34 @@
                 @Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = item.TeacherId }, null)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            <td>
+                @Html.DisplayFor(modelItem => item.City),
                 @Html.DisplayFor(modelItem => item.State)
             </td>
             <td>
+
                 @{
                     var count = int.Parse(@Html.DisplayFor(modelItem => item.FollowerCount).ToString());
                     <span class="follow-count">@count</span>
                 }
+                @if (item.FollowerCount == 1)
+                {
+                    <span class="follower-label">Follower</span>
+                }
+                else
+                {
+                    <span class="follower-label">Followers</span>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ResourceCount)
+                @if (item.ResourceCount == 1)
+                {
+                    <span>Resource</span>
+                }
+                else
+                {
+                    <span>Resources</span>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsFollowed, new { id = item.TeacherId, ListCount = i })
@@ -60,42 +60,79 @@
 </table>
 @section scripts {
     <script language="javascript" type="text/javascript">
-     $(document).ready(function () {
-         $("i[data-toggle='follow']")
-             .css({ "cursor": "pointer" })
-             .click(function (e) {
-                 var target = $(e.target);
-                 var teacherId = target.attr("data-id");
-                 var followSet = target.hasClass("glyphicon-plus");
+        $(document).ready(function () {
+            $("a[data-toggle='follow']")
+                .css({ "cursor": "pointer" })
+                .click(function (e) {
+                    var target = $(e.target);
+                    var teacherId = target.attr("data-id");
+                    var followSet = target.hasClass("follow-btn");
 
-                 $.ajax({
-                     method: followSet ? "PUT" : "DELETE",
-                     url: "/api/follow/" + teacherId + "/follow",
-                     data: null
-                 })
-                 .done(function (r) {
-                     target.removeClass();
-                     target.addClass("glyphicon " + (followSet ? "glyphicon-minus" : "glyphicon-plus"));
-                 })
-                 .fail(function (r) {
-                     alert("Failed to change follow status");
-                 });
-             });
-     });
+                    $.ajax({
+                        method: followSet ? "PUT" : "DELETE",
+                        url: "/api/follow/" + teacherId + "/follow",
+                        data: null
+                    })
+                        .done(function (r) {
+                            target.removeClass();
+                            target.addClass((followSet ? "btn unfollow-btn" : "btn follow-btn"));
+                        })
+                        .fail(function (r) {
+                            alert("Failed to change follow status");
+                        });
+                });
+        });
         const icons = document.querySelectorAll(".follow-icon");
         icons.forEach(i => i.addEventListener('click', function () {
             var parent = this.parentElement.parentElement.parentElement;
             var child = parent.querySelector(".follow-count");
+            var label = parent.querySelector(".follower-label");
             num = parseInt(child.textContent);
 
-            if (this.classList.contains("glyphicon-minus")) {
+            if (this.classList.contains("unfollow-btn")) {
                 num -= 1;
-                child.textContent = num.toString();
+                this.textContent = "follow";
+                if (num == 1) {
+                    label.textContent = "Follower";
+                    child.textContent = num.toString();
+                }
+                else {
+                    label.textContent = "Followers";
+                    child.textContent = num.toString();
+                }
             }
             else {
                 num += 1;
-                child.textContent = num.toString();
+                this.textContent = "unfollow";
+                if (num == 1) {
+                    label.textContent = "Follower";
+                    child.textContent = num.toString();
+                }
+                else {
+                    label.textContent = "Followers";
+                    child.textContent = num.toString();
+                }
             }
         }));
+
+        const search = document.getElementById("search-bar");
+        const table = document.getElementById("teachers");
+        search.addEventListener("keyup", function () {
+            var text = search.value.toUpperCase();
+            for (i = 0; table.rows[i]; i++) {
+                for (j = 0; j < 2; j++) {
+                    var currentCell = table.rows[i].cells[j];
+                    var cellText = currentCell.textContent.toUpperCase();
+                    if (cellText.includes(text)) {
+                        currentCell.parentElement.style.display = "";
+                        break;
+                    }
+                    else {
+                        currentCell.parentElement.style.display = "none";
+                        continue;
+                    }
+                }
+            }
+        });
     </script>
 }
