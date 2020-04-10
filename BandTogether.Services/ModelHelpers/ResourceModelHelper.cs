@@ -31,6 +31,7 @@ namespace BandTogether.Services.ModelHelpers
                         TeacherId = res.TeacherId,
                         TeacherName = $"{res.Teacher.FirstName} {res.Teacher.LastName}",
                         Title = res.Title,
+                        Description = res.Description,
                         DateCreated = res.DateCreated,
                         IsPublic = res.IsPublic
                     });

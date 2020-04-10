@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Index";
-    var resource = "resource";
 }
 
 <div class="d-flex flex-row justify-content-between">
@@ -11,46 +10,59 @@
 
 </div>
 <hr />
-<table id="teachers" class="table table-striped">
+<table id="teachers" class="table">
 
     @foreach (var item in Model)
     {
-        var i = 1;
+        var base64 = Convert.ToBase64String(item.ImageData);
+        var contentType = item.ContentType;
+        var imgSrc = String.Format($"data:{contentType};base64,{base64}");
+        var i = 0;
         <tr>
-            <td>
-                @Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = item.TeacherId }, null)
+            <td class="align-middle">
+                <div class="profile-pic-list">
+                    @if (item.FileName == "")
+                    {
+                        <img src="~/Assets/noprofilepic.jpg" alt="no profile picture" />
+                    }
+                    else
+                    {
+                        <img src="@imgSrc" alt="@item.FileName" class="" />
+                    }
+                </div>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City),
-                @Html.DisplayFor(modelItem => item.State)
+            <td class="align-middle">
+                <h6 class="mt-2">@Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = item.TeacherId }, null)</h6>
+                <p class="mb-0">@Html.DisplayFor(modelItem => item.SchoolName)</p>
+                <p class="mt-0 mb-0">@Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State)</p>
             </td>
-            <td>
+            <td class="align-middle">
+                <span class="font-weight-bold">@Html.DisplayFor(modelItem => item.ResourceCount)</span>
+                @if (item.ResourceCount == 1)
+                {
+                    <span class="text-uppercase">Resource</span>
+                }
+                else
+                {
+                    <span class="text-uppercase">Resources</span>
+                }
+            </td>
+            <td class="align-middle">
 
                 @{
                     var count = int.Parse(@Html.DisplayFor(modelItem => item.FollowerCount).ToString());
-                    <span class="follow-count">@count</span>
+                    <span class="follow-count font-weight-bold">@count</span>
                 }
                 @if (item.FollowerCount == 1)
                 {
-                    <span class="follower-label">Follower</span>
+                    <span class="follower-label text-uppercase"> Follower</span>
                 }
                 else
                 {
-                    <span class="follower-label">Followers</span>
+                    <span class="follower-label text-uppercase"> Followers</span>
                 }
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ResourceCount)
-                @if (item.ResourceCount == 1)
-                {
-                    <span>Resource</span>
-                }
-                else
-                {
-                    <span>Resources</span>
-                }
-            </td>
-            <td>
+            <td class="align-middle">
                 @Html.DisplayFor(modelItem => item.IsFollowed, new { id = item.TeacherId, ListCount = i })
             </td>
         </tr>
@@ -58,6 +70,7 @@
     }
 
 </table>
+<hr />
 @section scripts {
     <script language="javascript" type="text/javascript">
         $(document).ready(function () {

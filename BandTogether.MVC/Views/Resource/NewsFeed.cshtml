@@ -16,21 +16,19 @@
     {
         <div class="card">
             <div class="card-header">
-                <h5 class="">@Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = item.TeacherId }, null)</h5>
+                <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
             </div>
             <div class="card-body">
-                @Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)
+                <p>@Html.DisplayFor(modelItem => item.Description)</p>
             </div>
             <div class="card-footer">
+                @Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = item.TeacherId }, null)
                 <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
             </div>
         </div>
     }
-
-
-
-
 </div>
+<hr />
 @section scripts{
 
     <script>

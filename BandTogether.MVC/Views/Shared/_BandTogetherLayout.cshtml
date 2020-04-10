@@ -16,15 +16,13 @@
         </div>
         <!-- Navigation Menu -->
         @Html.Partial("_LoginPartial")
-        
+
     </nav>
     <div class="container body-content">
         @RenderBody()
     </div>
     <footer class="container-fluid">
-        <nav class="navbar fixed-bottom">
-            <div class="ml-auto"><img src="~/Assets/eightnote.png" class="nav-logo" alt="" /></div>
-        </nav>
+        <div class="float-right mr-4 mb-3"><img src="~/Assets/eightnote.png" class="nav-logo" alt="" /></div>
     </footer>
 
     @Scripts.Render("~/bundles/jquery")

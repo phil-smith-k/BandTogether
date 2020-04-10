@@ -46,13 +46,17 @@ namespace BandTogether.Services.ModelHelpers
                 else
                 {
                     var fullname = $"{teacher.FirstName} {teacher.LastName}";
+                    var school = teacher.Schools.FirstOrDefault()?.SchoolName ?? null;
                     var city = _schoolHelper.GetSchoolCity(teacher.Schools);
                     var state = _schoolHelper.GetSchoolState(teacher.Schools);
                     var followers = GetFollowCount(teacher.Followers);
                     var resources = _resourceHelper.GetResourcesCount(teacher.Resources);
                     var isFollowed = currentUser.Following.Contains(teacher);
+                    var fileName = _fileHelper.GetFileName(teacher.ProfilePicture);
+                    var content = _fileHelper.GetFileContentType(teacher.ProfilePicture);
+                    var data = _fileHelper.GetFileData(teacher.ProfilePicture);
 
-                    teacherListItems.Add(new TeacherListItem(teacher.Id, fullname, city, state, followers, resources, isFollowed));
+                    teacherListItems.Add(new TeacherListItem(teacher.Id, fullname, school, city, state, followers, resources, isFollowed, fileName, content, data));
                 }
             }
             return teacherListItems;

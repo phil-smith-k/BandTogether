@@ -10,18 +10,23 @@ namespace BandTogether.Models.TeacherModels
     public class TeacherListItem
     {
         public TeacherListItem() { }
-        public TeacherListItem(string id, string name, string city, string state, int followers, int resources, bool isFollowed)
+        public TeacherListItem(string id, string name, string schoolName, string city, string state, int followers, int resources, bool isFollowed, string fileName, string content, byte[] data)
         {
             this.TeacherId = id;
             this.TeacherName = name;
+            this.SchoolName = schoolName;
             this.City = city;
             this.State = state;
             this.FollowerCount = followers;
             this.ResourceCount = resources;
             this.IsFollowed = isFollowed;
+            this.FileName = fileName;
+            this.ContentType = content;
+            this.ImageData = data;
         }
         public string TeacherId { get; set; }
         public string TeacherName { get; set; }
+        public string SchoolName { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         [Display(Name = "Followers")]
@@ -31,5 +36,8 @@ namespace BandTogether.Models.TeacherModels
         [UIHint("Follow")]
         [Display(Name = "Follow")]
         public bool IsFollowed { get; set; }
+        public string FileName { get; set; }
+        public string ContentType { get; set; }
+        public byte[] ImageData { get; set; }
     }
 }

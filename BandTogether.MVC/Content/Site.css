@@ -1,14 +1,23 @@
 ﻿/* Global Styling */
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Gotu&display=swap');
+::-webkit-scrollbar {
+    display: none;
+}
 body {
     padding-top: 75px;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 0.06em;
     background-color: #ffffff;
+    min-height: 100vh;
+    display: block;
+    padding-bottom: 100px;
+    position: relative;
 }
-.footer{
+footer{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
     height: 70px;
 }
 .divider {
@@ -29,13 +38,28 @@ h2 {
     font-family: 'Gotu', sans-serif;
     color: #616771;
 }
+h6 {
+    font-family: 'Gotu', sans-serif;
+    font-size: 20px;
+}
 .follow-btn {
-    width: 100px;
+    width: 120px;
     background-color: #3d59a8;
     color: white !important;
     text-transform: uppercase;
     font-size: 12px;
     border-radius: 18px;
+}
+.update-profile-btn {
+    width: 170px;
+    background-color: #3d59a8;
+    color: white !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 18px;
+}
+.update-profile-btn:hover {
+    background-color: rgba(61, 89, 168, 0.8)
 }
 .follow-btn:hover {
     background-color: rgba(61, 89, 168, 0.8)
@@ -43,8 +67,8 @@ h2 {
 .unfollow-btn {
     background-color: white;
     border: 1px solid #3d59a8;
-    width: 100px;
-    color: #3d59a8 !important;
+    width: 120px;
+    color: black ActiveBorder !important;
     text-transform: uppercase;
     font-size: 12px;
     border-radius: 20px;
@@ -60,6 +84,13 @@ h2 {
     height: 175px;
     width: 175px;
     border: 7px solid #3d59a8;
+}
+.profile-pic-list > img {
+    border-radius: 50%;
+    margin-left: 1em;
+    height: 85px;
+    width: 85px;
+    border: 2px solid #3d59a8;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -142,12 +173,12 @@ textarea {
     width: 45px;
     height: 45px;
 }
-.card-header{
+.card-header {
     background-color: white;
     border-bottom: none;
 }
 .card-footer{
-    font-size: 10px;
+    font-size: 15px;
     background-color: white;
     border-top: none;
 }

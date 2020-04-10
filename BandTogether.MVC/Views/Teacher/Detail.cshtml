@@ -8,6 +8,7 @@
     var contentType = Model.ContentType;
     var imgSrc = String.Format($"data:{contentType};base64,{base64}");
 }
+    <hr />
 <div class="follow-header d-flex justify-content-between">
     <dl class="">
         <dt>
@@ -32,7 +33,7 @@
     <div class="">
         @if (User.Identity.GetUserId() == Model.TeacherId)
         {
-            @Html.ActionLink("Update Profile", "Detail", "EditProfile", new { id = Model.TeacherId }, new { @class = "btn btn-primary" })
+            @Html.ActionLink("Update Profile", "Detail", "EditProfile", new { id = Model.TeacherId }, new { @class = "btn update-profile-btn" })
         }
     </div>
 </div>

@@ -13,6 +13,7 @@ namespace BandTogether.Models.ResourceModels
         public string TeacherId { get; set; }
         public string TeacherName { get; set; }
         public string Title { get; set; }
+        public string Description { get; set; }
         [Display(Name = "Added")]
         public DateTimeOffset DateCreated { get; set; }
         [Display(Name = "Is Public")]
