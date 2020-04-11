@@ -14,6 +14,17 @@ body {
     padding-bottom: 100px;
     position: relative;
 }
+input[type="file"] {
+    display: none;
+}
+#output_image {
+    border-radius: 50%;
+    height: 175px;
+    width: 175px;
+    border: 4px solid #3d59a8;
+    display: block;
+    margin: auto;
+}
 footer{
     width: 100%;
     position: absolute;
@@ -32,7 +43,7 @@ footer{
     color: #616771 !important;
 }*/
 form {
-    max-width: 400px;
+    max-width: 600px;
 }
 h2 {
     font-family: 'Gotu', sans-serif;
@@ -49,6 +60,8 @@ h6 {
     text-transform: uppercase;
     font-size: 12px;
     border-radius: 18px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
 }
 .update-profile-btn {
     width: 170px;
@@ -57,6 +70,37 @@ h6 {
     text-transform: uppercase;
     font-size: 12px;
     border-radius: 18px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+.delete-btn {
+    width: 70px;
+    background-color: #E70808;
+    color: white !important;
+    margin-top: 1em;
+    margin-right: 1.5em;
+    text-transform: uppercase;
+    font-size: 9px;
+    border-radius: 18px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+}
+.delete-btn:hover {
+    background-color: rgba(231,8,8, 0.5)
+}
+.update-btn {
+    width: 70px;
+    background-color: #3d59a8;
+    margin-top: 1em;
+    color: white !important;
+    text-transform: uppercase;
+    font-size: 9px;
+    border-radius: 18px;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+}
+.update-btn:hover {
+    background-color: rgba(61, 89, 168, 0.8)
 }
 .update-profile-btn:hover {
     background-color: rgba(61, 89, 168, 0.8)
@@ -68,10 +112,12 @@ h6 {
     background-color: white;
     border: 1px solid #3d59a8;
     width: 120px;
-    color: black ActiveBorder !important;
+    color: black!important;
     text-transform: uppercase;
     font-size: 12px;
     border-radius: 20px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
 }
 .unfollow-btn:hover {
     border: 1px solid rgba(61, 89, 168, 0.3);
@@ -83,7 +129,7 @@ h6 {
     margin-left: 1em;
     height: 175px;
     width: 175px;
-    border: 7px solid #3d59a8;
+    border: 4px solid #3d59a8;
 }
 .profile-pic-list > img {
     border-radius: 50%;
@@ -191,4 +237,7 @@ textarea {
 }
 #teachers{
     transition: display linear 2s;
+}
+ul {
+    list-style: none;
 }

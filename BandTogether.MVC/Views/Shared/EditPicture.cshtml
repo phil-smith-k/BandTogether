@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNet.Identity;
+@model BandTogether.Models.EditProfileModels.EditProfilePicture
+
+@{
+    ViewBag.Title = "EditPicture";
+}
+@using (Html.BeginForm("EditPicture", "EditProfile", new { id = User.Identity.GetUserId() }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="">
+                <label for="image" class="btn unfollow-btn ml-4 mb-3" style="display: block;">
+                    Browse
+                </label>
+                <input type="file" id="image" name="image" value="Upload Image" onchange="preview_image(event)" />
+                <img id="output_image"  alt="" />
+                <input type="submit" value="Save" class="btn follow-btn float-right mb-3 mr-3" />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

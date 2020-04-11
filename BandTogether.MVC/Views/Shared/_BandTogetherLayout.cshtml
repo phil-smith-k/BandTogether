@@ -6,6 +6,16 @@
     <title>Band Together</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script>
+        function preview_image(event) {
+            var reader = new FileReader();
+            reader.onload = function () {
+                var output = document.getElementById('output_image');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </head>
 <body>
     <nav id="nav" class="navbar fixed-top navbar-light bg-light navbar-fixed-top navbar-expand-sm col-12">

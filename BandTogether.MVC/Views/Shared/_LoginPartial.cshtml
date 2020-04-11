@@ -5,7 +5,7 @@
     {
     @Html.AntiForgeryToken()
 
-    <ul class="nav navbar-nav pull-right">
+    <ul class="nav navbar-right ml-auto">
         <li>
             @Html.ActionLink("Explore", "NewsFeed", "Resource", null, new { @class = "btn btn-default" })
         </li>
@@ -23,7 +23,7 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right float-right">
+    <ul class="nav navbar-right ml-auto">
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>

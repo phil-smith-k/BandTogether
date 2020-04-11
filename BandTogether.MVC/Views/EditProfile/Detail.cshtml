@@ -1,4 +1,5 @@
 ﻿@using BandTogether.Models.SchoolModels;
+@using BandTogether.Models.EditProfileModels;
 @model BandTogether.Models.TeacherModels.TeacherDetail
 
 @{
@@ -7,11 +8,34 @@
     var base64 = Convert.ToBase64String(Model.ImageData);
     var contentType = Model.ContentType;
     var imgSrc = String.Format($"data:{contentType};base64,{base64}");
+    EditProfileName editName = new EditProfileName
+    {
+        TeacherId = Model.TeacherId,
+        FirstName = Model.FirstName,
+        LastName = Model.LastName
+    };
 }
-
-    <hr />
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["ErrorMessage"]
+    </div>
+}
+<hr />
 <div class="">
-    @Html.ActionLink("Update Name", "EditName", "EditProfile", new { id = Model.TeacherId }, new { @class = "btn update-profile-btn float-right" })
+    <button type="button" class="btn update-profile-btn float-right" data-toggle="modal" data-target="#edit-name">Update Name</button>
 </div>
 <div class="">
     <h2>@Model.FirstName @Model.LastName</h2>
@@ -19,35 +43,40 @@
 
 <hr />
 <div class="">
-    @Html.ActionLink("Update Picture", "EditPicture", "EditProfile", new { id = Model.TeacherId }, new { @class = "btn update-profile-btn float-right" })
+    <button type="button" class="btn update-profile-btn float-right" data-toggle="modal" data-target="#edit-picture">Update Picture</button>
 </div>
-    <div class="profile-pic">
-@if (Model.FileName == "")
-{
+<div class="profile-pic">
+    @if (Model.FileName == "")
+    {
         <img src="~/Assets/noprofilepic.jpg" alt="" />
-}
-else
-{
-    <img src="@imgSrc" alt="@Model.FileName" class="profile-pic" />
-}
-    </div>
+    }
+    else
+    {
+        <img src="@imgSrc" alt="@Model.FileName" class="profile-pic" />
+    }
+</div>
 <hr />
-@if (Model.Schools.Count != 0)
-{
 <button type="button" class="btn update-profile-btn float-right" data-toggle="modal" data-target="#create-school">Add School</button>
+@if (ViewBag.Schools.Count != 0)
+{
     <ul class="list-group">
-        @foreach (var item in Model.Schools)
+        @foreach (var item in (List<SchoolDetail>)ViewBag.Schools)
         {
-        <li class="">
-            @Html.DisplayFor(modelItem => item.SchoolName) -
 
-            @Html.DisplayFor(modelItem => item.City),
+            var schoolEdit = new SchoolEdit(Model.TeacherId, item.SchoolId, item.SchoolName, item.StreetAddress, item.City, item.State, item.ZipCode, item.LowestGrade, item.HighestGrade);
+            var schoolDelete = new SchoolDetail(item.SchoolId, item.SchoolName, item.LowestGrade, item.HighestGrade, item.StreetAddress, item.City, item.State, item.ZipCode);
 
-            @Html.DisplayFor(modelItem => item.State) -
-
-            @Html.ActionLink("Edit", "Edit", "School") |
-            @Html.ActionLink("Delete", "Delete", "School")
-        </li>
+            <li style="margin-bottom: 1.5em;">
+                <a class="font-weight-bold school-name" style="cursor: pointer;">@Html.DisplayFor(modelItem => item.SchoolName)</a>
+                <div class="address" style="display: none;">
+                    @Html.DisplayFor(modelItem => item.StreetAddress)<br />
+                    @Html.DisplayFor(modelItem => item.City),
+                    @Html.DisplayFor(modelItem => item.State) @Html.DisplayFor(modelItem => item.ZipCode)<br />
+                    Grades: @Html.DisplayFor(modelItem => item.LowestGrade)-@Html.DisplayFor(modelItem => item.HighestGrade)<br />
+                    @{Html.RenderPartial("EditSchool", schoolEdit, new ViewDataDictionary { { "schoolId", item.SchoolId } });}
+                    @{Html.RenderPartial("DeleteSchool", schoolDelete, new ViewDataDictionary { { "schoolId", item.SchoolId } });}
+                </div>
+            </li>
         }
     </ul>
 }
@@ -56,7 +85,7 @@ else
     <p>You have not added any schools.</p>
 }
 <hr />
-<div class="modal" id="create-school" tabindex="-1" role="dialog">
+<div class="modal fade" id="create-school" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -71,7 +100,7 @@ else
         </div>
     </div>
 </div>
-<div class="modal" id="create-school" tabindex="-1" role="dialog">
+<div class="modal fade" id="edit-picture" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -81,13 +110,43 @@ else
                 </button>
             </div>
             <div class="modal-body">
-                @{Html.RenderPartial("CreateSchool", new SchoolCreate());}
+                @{Html.RenderPartial("EditPicture", new BandTogether.Models.EditProfileModels.EditProfilePicture());}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="edit-name" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Update Name</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @{Html.RenderPartial("EditName", editName);}
             </div>
         </div>
     </div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        const schools = document.querySelectorAll(".school-name");
+
+        schools.forEach(s => s.addEventListener('click', function () {
+            var listElement = this.parentElement;
+            var address = listElement.querySelector(".address");
+            if (address.style.display === "none") {
+                address.style.display = "block";
+            }
+            else {
+                address.style.display = "none";
+            }
+        }));
+
+    </script>
 }
 
 

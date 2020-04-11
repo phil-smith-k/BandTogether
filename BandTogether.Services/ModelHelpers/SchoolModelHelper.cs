@@ -60,5 +60,30 @@ namespace BandTogether.Services.ModelHelpers
 
             return entity;
         }
+        public IEnumerable<SchoolDetail> BuildSchoolDetailList(ICollection<School> schools) 
+        {
+            var schoolDetails = schools.Select(sch =>
+                new SchoolDetail(
+                    sch.SchoolId, 
+                    sch.SchoolName, 
+                    sch.LowestGrade, 
+                    sch.HighestGrade, 
+                    sch.Address.StreetAddress, 
+                    sch.Address.City, 
+                    sch.Address.State, 
+                    sch.Address.ZipCode)).ToList();
+
+            return schoolDetails;
+        }
+        public void UpdateSchoolEntity(SchoolEdit model, School entity)
+        {
+            entity.SchoolName = model.SchoolName;
+            entity.Address.StreetAddress = model.StreetAddress;
+            entity.Address.City = model.City;
+            entity.Address.State = model.State;
+            entity.Address.ZipCode = model.ZipCode;
+            entity.HighestGrade = model.HighestGradeLevel;
+            entity.LowestGrade = model.LowestGradeLevel;
+        }
     }
 }

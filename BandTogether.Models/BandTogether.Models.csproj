@@ -105,6 +105,8 @@
     <Compile Include="ResourceModels\TheoryResourceModels\TheoryDetail.cs" />
     <Compile Include="ResourceModels\TheoryResourceModels\TheoryResourceListItem.cs" />
     <Compile Include="SchoolModels\SchoolCreate.cs" />
+    <Compile Include="SchoolModels\SchoolDetail.cs" />
+    <Compile Include="SchoolModels\SchoolEdit.cs" />
     <Compile Include="SchoolModels\SchoolListItem.cs" />
     <Compile Include="SchoolModels\StateList.cs" />
     <Compile Include="TeacherModels\TeacherDetail.cs" />

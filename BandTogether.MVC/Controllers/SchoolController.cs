@@ -19,27 +19,62 @@ namespace BandTogether.MVC.Controllers
                 var service = CreateSchoolService();
                 if (service.AddSchoolToTeacher(model))
                 {
+                    TempData["SaveResult"] = "School was successfully removed.";
                     return RedirectToAction("Detail", "EditProfile", new { id = this.User.Identity.GetUserId() });
                 }
                 else
                 {
-                    return Json(new
-                    {
-                        status = "failure",
-                        formErrors = this.ModelState.Select(kvp => new { key = kvp.Key, errors = kvp.Value.Errors.Select(e => e.ErrorMessage) })
-                    });
+                    TempData["ErrorMessage"] = "School could not be added. Try again.";
+                    return RedirectToAction("Detail", new { id = model.TeacherId });
                 }
             }
             else
             {
-                return Json(new
-                {
-                    status = "failure",
-                    formErrors= this.ModelState.Select(kvp => new { key = kvp.Key, errors = kvp.Value.Errors.Select(e => e.ErrorMessage)})
-                });
+                TempData["ErrorMessage"] = "School could not be added. Try again.";
+                return RedirectToAction("Detail", new { id = model.TeacherId });
             }
 
         }
+
+        [HttpPost]
+        public ActionResult EditSchool(SchoolEdit model)
+        {
+            if (this.ModelState.IsValid)
+            {
+                var service = CreateSchoolService();
+                if (service.UpdateSchool(model))
+                {
+                    return RedirectToAction("Detail", "EditProfile", new { id = this.User.Identity.GetUserId() });
+                }
+                else
+                {
+                    TempData["ErrorMessage"] = "School could not be updated. Try again.";
+                    return RedirectToAction("Detail", new { id = model.TeacherId });
+                }
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "School could not be updated. Try again.";
+                return RedirectToAction("Detail", new { id = model.TeacherId });
+            }
+        }
+
+        [HttpPost]
+        public ActionResult DeleteSchool(int id)
+        {
+            var service = CreateSchoolService();
+            if (service.DeleteSchool(id))
+            {
+                TempData["SaveResult"] = "School was successfully removed.";
+                return RedirectToAction("Detail", "EditProfile", new { id = this.User.Identity.GetUserId() });
+            }
+            else
+            {
+                TempData["ErrorMessage"] = "School could not be removed.";
+                return RedirectToAction("Detail", new { id = this.User.Identity.GetUserId() });
+            }
+        }
+
         private SchoolService CreateSchoolService()
         {
             var userId = this.User.Identity.GetUserId();

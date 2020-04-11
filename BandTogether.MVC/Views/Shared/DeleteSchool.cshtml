@@ -1,0 +1,56 @@
+﻿@model BandTogether.Models.SchoolModels.SchoolDetail
+
+@{
+    var schoolId = ViewData["schoolId"];
+}
+<button type="button" class="btn delete-btn" data-toggle="modal" data-target="#delete-school-@Html.Raw(schoolId)">Remove</button>
+<div class="modal fade" id="delete-school-@Html.Raw(schoolId)" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6>Are you sure?</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("DeleteSchool", "School", new { id = Model.SchoolId }, FormMethod.Post, null))
+                {
+
+                    <a class="font-weight-bold school-name" style="cursor: pointer;">@Html.DisplayFor(modelItem => Model.SchoolName)</a>
+                    <div class="address">
+                        @Html.DisplayFor(modelItem => Model.StreetAddress)<br />
+                        @Html.DisplayFor(modelItem => Model.City),
+                        @Html.DisplayFor(modelItem => Model.State) @Html.DisplayFor(modelItem => Model.ZipCode)<br />
+                        Grades: @Html.DisplayFor(modelItem => Model.LowestGrade)-@Html.DisplayFor(modelItem => Model.HighestGrade)<br />
+                    </div>
+
+                    <div class="form-group">
+                        <div class="">
+                            <input type="submit" value="Remove" class="btn delete-btn" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function onChangeSuccess(data) {
+
+            if (data.status === "success") {
+                $("#modalcontent").modal('hide');
+                $("#message-area").html(data.view);
+            }
+            $.each(data.formErrors, function () {
+                $("[data-valmsg-for=" + this.key + "]").html(this.errors.join());
+            });
+        }
+    </script>
+}
+

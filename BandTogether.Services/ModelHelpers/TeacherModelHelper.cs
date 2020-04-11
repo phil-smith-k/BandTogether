@@ -16,6 +16,7 @@ namespace BandTogether.Services.ModelHelpers
         private readonly ResourceModelHelper _resourceHelper = new ResourceModelHelper();
         private readonly SchoolModelHelper _schoolHelper = new SchoolModelHelper();
         private readonly FileModelHelper _fileHelper = new FileModelHelper();
+
         public int GetFollowCount(ICollection<Teacher> followList)
         {
             if (followList == null)

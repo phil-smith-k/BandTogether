@@ -350,8 +350,8 @@
     <Content Include="Views\Teacher\Detail.cshtml" />
     <Content Include="Views\Teacher\Index.cshtml" />
     <Content Include="Views\EditProfile\Detail.cshtml" />
-    <Content Include="Views\EditProfile\EditName.cshtml" />
-    <Content Include="Views\EditProfile\EditPicture.cshtml" />
+    <Content Include="Views\Shared\EditName.cshtml" />
+    <Content Include="Views\Shared\EditPicture.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Follow.cshtml" />
     <Content Include="Views\Resource\CreateTechnique.cshtml" />
     <Content Include="Views\Resource\CreateEnsemble.cshtml" />
@@ -374,6 +374,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Shared\DisplayTemplates\DateTimeOffset.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\NullableDateTimeOffset.cshtml" />
+    <Content Include="Views\Shared\EditSchool.cshtml" />
+    <Content Include="Views\Shared\DeleteSchool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
