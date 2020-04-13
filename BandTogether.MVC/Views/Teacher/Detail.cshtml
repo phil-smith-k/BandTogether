@@ -1,5 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity;
 @using BandTogether.Models.ResourceModels;
+@using BandTogether.Models.ResourceModels.TechniqueResourceModels;
+
 @model BandTogether.Models.TeacherModels.TeacherDetail
 
 @{
@@ -8,7 +10,10 @@
     var contentType = Model.ContentType;
     var imgSrc = String.Format($"data:{contentType};base64,{base64}");
 }
-    <hr />
+
+@{ Html.RenderPartial("AddResource"); }
+
+<hr />
 <div class="follow-header d-flex justify-content-between">
     <dl class="">
         <dt>
@@ -75,3 +80,14 @@
         </div>
     }
 </div>
+@section Scripts{
+
+    <script>
+        const tabs = document.querySelectorAll(".nav-link");
+        const title = document.querySelector(".modal-title");
+        title.textContent = "New Instrument Resource";
+        tabs.forEach(t => t.addEventListener("click", function () {
+            title.textContent = "New " + this.textContent + " Resource";
+        }));
+    </script>
+}

@@ -353,9 +353,9 @@
     <Content Include="Views\Shared\EditName.cshtml" />
     <Content Include="Views\Shared\EditPicture.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Follow.cshtml" />
-    <Content Include="Views\Resource\CreateTechnique.cshtml" />
-    <Content Include="Views\Resource\CreateEnsemble.cshtml" />
-    <Content Include="Views\Resource\CreateTheory.cshtml" />
+    <Content Include="Views\Shared\CreateTechnique.cshtml" />
+    <Content Include="Views\Shared\CreateEnsemble.cshtml" />
+    <Content Include="Views\Shared\CreateTheory.cshtml" />
     <Content Include="Views\Resource\TechniqueDetail.cshtml" />
     <Content Include="Views\Resource\EnsembleDetail.cshtml" />
     <Content Include="Views\Resource\TheoryDetail.cshtml" />
@@ -376,6 +376,7 @@
     <Content Include="Views\Shared\DisplayTemplates\NullableDateTimeOffset.cshtml" />
     <Content Include="Views\Shared\EditSchool.cshtml" />
     <Content Include="Views\Shared\DeleteSchool.cshtml" />
+    <Content Include="Views\Shared\AddResource.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

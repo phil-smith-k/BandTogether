@@ -1,0 +1,48 @@
+﻿@using BandTogether.Models.ResourceModels.EnsembleResourceModels;
+@using BandTogether.Models.ResourceModels.TheoryResourceModels;
+@using BandTogether.Models.ResourceModels.TechniqueResourceModels;
+
+<button id="add-resource" type="button" class="btn update-profile-btn" data-toggle="modal" data-target="#myModal">Add Resource</button>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active nav-item">
+                            <a href="#technique" aria-controls="techniqueTab" role="tab" data-toggle="tab" class="nav-link">Instrument</a>
+                        </li>
+                        <li role="presentation" class="nav-item">
+                            <a href="#ensemble" aria-controls="ensembleTab" role="tab" data-toggle="tab" class="nav-link">Ensemble</a>
+                        </li>
+                        <li role="presentation" class="nav-item">
+                            <a href="#theory" aria-controls="theoryTab" role="tab" data-toggle="tab" class="nav-link">Music Theory</a>
+                        </li>
+                    </ul>
+                    <hr />
+                    <h4 class="modal-title" style="margin: 1em 0 1em 1em;"></h4>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="technique">
+                            @{ Html.RenderPartial("CreateTechnique", new TechniqueCreate()); }
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="ensemble">
+                            @{ Html.RenderPartial("CreateEnsemble", new EnsembleCreate()); }
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="theory">
+                            @{ Html.RenderPartial("CreateTheory", new TheoryCreate()); }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+
+}
