@@ -1,0 +1,160 @@
+﻿@model IEnumerable<BandTogether.Models.TeacherModels.TeacherListItem>
+
+@{
+    ViewBag.Title = "Followers";
+}
+
+<div class="d-flex flex-row justify-content-between">
+    <h2 class="flex-fill">Followers</h2>
+    <input type="text" id="search-bar" class="flex-fill" placeholder="Search Followers...">
+
+</div>
+<hr />
+@if (Model.Count() == 0)
+{
+    <div class="text-center">
+        <p>You have no followers.</p>
+        @Html.ActionLink("Find Teachers", "Index", "Teacher", null, new { @class = "btn update-profile-btn" })
+    </div>
+}
+<table id="teachers" class="table">
+
+    @foreach (var item in Model)
+    {
+        var base64 = Convert.ToBase64String(item.ImageData);
+        var contentType = item.ContentType;
+        var imgSrc = String.Format($"data:{contentType};base64,{base64}");
+        var i = 0;
+        <tr>
+            <td class="align-middle">
+                <div class="profile-pic-list">
+                    @if (item.FileName == "")
+                    {
+                        <img src="~/Assets/noprofilepic.jpg" alt="no profile picture" />
+                    }
+                    else
+                    {
+                        <img src="@imgSrc" alt="@item.FileName" class="" />
+                    }
+                </div>
+            </td>
+            <td class="align-middle">
+                <h6 class="mt-2">@Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = item.TeacherId }, null)</h6>
+                <p class="mb-0">@Html.DisplayFor(modelItem => item.SchoolName)</p>
+                <p class="mt-0 mb-0">@Html.DisplayFor(modelItem => item.City), @Html.DisplayFor(modelItem => item.State)</p>
+            </td>
+            <td class="align-middle">
+                <span class="font-weight-bold">@Html.DisplayFor(modelItem => item.ResourceCount)</span>
+                @if (item.ResourceCount == 1)
+                {
+                    <span class="text-uppercase">Resource</span>
+                }
+                else
+                {
+                    <span class="text-uppercase">Resources</span>
+                }
+            </td>
+            <td class="align-middle">
+
+                @{
+                    var count = int.Parse(@Html.DisplayFor(modelItem => item.FollowerCount).ToString());
+                    <span class="follow-count font-weight-bold">@count</span>
+                }
+                @if (item.FollowerCount == 1)
+                {
+                    <span class="follower-label text-uppercase"> Follower</span>
+                }
+                else
+                {
+                    <span class="follower-label text-uppercase"> Followers</span>
+                }
+            </td>
+            <td class="align-middle">
+                @Html.DisplayFor(modelItem => item.IsFollowed, new { id = item.TeacherId, ListCount = i })
+            </td>
+        </tr>
+        i++;
+    }
+
+</table>
+<hr />
+@section scripts {
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $("a[data-toggle='follow']")
+                .css({ "cursor": "pointer" })
+                .click(function (e) {
+                    var target = $(e.target);
+                    var teacherId = target.attr("data-id");
+                    var followSet = target.hasClass("follow-btn");
+
+                    $.ajax({
+                        method: followSet ? "PUT" : "DELETE",
+                        url: "/api/follow/" + teacherId + "/follow",
+                        data: null
+                    })
+                        .done(function (r) {
+                            target.removeClass();
+                            target.addClass((followSet ? "btn unfollow-btn" : "btn follow-btn"));
+                        })
+                        .fail(function (r) {
+                            alert("Failed to change follow status");
+                        });
+                });
+        });
+        const icons = document.querySelectorAll(".follow-icon");
+        icons.forEach(i => i.addEventListener('click', function () {
+            var parent = this.parentElement.parentElement.parentElement;
+            var child = parent.querySelector(".follow-count");
+            var label = parent.querySelector(".follower-label");
+            num = parseInt(child.textContent);
+
+            if (this.classList.contains("unfollow-btn")) {
+                num -= 1;
+                this.textContent = "follow";
+                if (num == 1) {
+                    label.textContent = "Follower";
+                    child.textContent = num.toString();
+                }
+                else {
+                    label.textContent = "Followers";
+                    child.textContent = num.toString();
+                }
+            }
+            else {
+                num += 1;
+                this.textContent = "unfollow";
+                if (num == 1) {
+                    label.textContent = "Follower";
+                    child.textContent = num.toString();
+                }
+                else {
+                    label.textContent = "Followers";
+                    child.textContent = num.toString();
+                }
+            }
+        }));
+
+        const search = document.getElementById("search-bar");
+        const table = document.getElementById("teachers");
+        search.addEventListener("keyup", function () {
+            var text = search.value.toUpperCase();
+            for (i = 0; table.rows[i]; i++) {
+                for (j = 0; j < 2; j++) {
+                    var currentCell = table.rows[i].cells[j];
+                    var cellText = currentCell.textContent.toUpperCase();
+                    if (cellText.includes(text)) {
+                        currentCell.parentElement.style.display = "";
+                        break;
+                    }
+                    else {
+                        currentCell.parentElement.style.display = "none";
+                        continue;
+                    }
+                }
+            }
+        });
+    </script>
+}
+
+

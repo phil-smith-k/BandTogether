@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "NewsFeed";
+
 }
 
 <div class="d-flex flex-row justify-content-between">
@@ -11,19 +12,26 @@
 </div>
 <hr />
 @{Html.RenderPartial("AddResource"); }
-<div class="card-columns">
+<div class="card-columns mt-4">
     @foreach (var item in Model)
     {
-        <div class="card">
-            <div class="card-header">
-                <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
-            </div>
+        var base64 = Convert.ToBase64String(item.ImageData);
+        var contentType = item.ContentType;
+        var imgSrc = String.Format($"data:{contentType};base64,{base64}");
+
+        <div class="card resource-card">
             <div class="card-body">
-                <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
+                <hr />
+                <p>@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                <p><span class="font-weight-bold">Description: </span><br />@Html.DisplayFor(modelItem => item.Description)</p>
             </div>
             <div class="card-footer">
-                @Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = item.TeacherId }, null)
-                <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                <div class="profile-pic-resource d-flex align-items-center">
+                    <img src="@imgSrc" />
+                    <h5 class="align-content-center ml-3">@Html.ActionLink(@Html.DisplayFor(modelItem => item.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = item.TeacherId }, null)</h5>
+                    <hr />
+                </div>
             </div>
         </div>
     }

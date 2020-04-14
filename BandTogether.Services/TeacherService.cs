@@ -52,6 +52,34 @@ namespace BandTogether.Services
                     return _teacherHelper.GetEditProfileNameModel(entity);
             }
         }
+        public IEnumerable<TeacherListItem> GetFollowersForTeacher(string id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Teachers.Find(id);
+                var currentUser = ctx.Teachers.Find(_currentUser);
+                if (entity != null && currentUser != null)
+                {
+                    return _teacherHelper.GetTeacherListItems(entity.Followers.ToList(), currentUser);
+                }
+                else
+                    throw new InvalidOperationException();
+            }
+        }
+        public IEnumerable<TeacherListItem> GetFollowingForTeacher(string id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Teachers.Find(id);
+                var currentUser = ctx.Teachers.Find(_currentUser);
+                if (entity != null && currentUser != null)
+                {
+                    return _teacherHelper.GetTeacherListItems(entity.Following.ToList(), currentUser);
+                }
+                else
+                    throw new InvalidOperationException();
+            }
+        }
         //____________________________________________UPDATE
         public bool UpdateProfileName(EditProfileName model)
         {

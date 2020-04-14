@@ -19,6 +19,26 @@ namespace BandTogether.MVC.Controllers
             var teachers = service.GetAllTeachers();
             return View(teachers);
         }
+        [HttpGet]
+        [Route(Name = "Teacher/Followers/{id}")]
+        public ActionResult Followers(string id)
+        {
+            var service = CreateTeacherService();
+
+            var followers = service.GetFollowersForTeacher(id);
+
+            return View(followers);
+        }
+        [HttpGet]
+        [Route(Name = "Teacher/Following/{id}")]
+        public ActionResult Following(string id)
+        {
+            var service = CreateTeacherService();
+
+            var following = service.GetFollowingForTeacher(id);
+
+            return View(following);
+        }
 
         [HttpGet]
         [Route(Name = "Teacher/Detail/{id}")]

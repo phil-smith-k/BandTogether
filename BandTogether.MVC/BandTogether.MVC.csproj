@@ -378,6 +378,8 @@
     <Content Include="Views\Shared\EditSchool.cshtml" />
     <Content Include="Views\Shared\DeleteSchool.cshtml" />
     <Content Include="Views\Shared\AddResource.cshtml" />
+    <Content Include="Views\Teacher\Followers.cshtml" />
+    <Content Include="Views\Teacher\Following.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

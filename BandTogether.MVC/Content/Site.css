@@ -75,6 +75,21 @@ h6 {
     font-weight: 700;
     letter-spacing: 0.15em;
 }
+.not-downloadable {
+    width: 170px;
+    background-color: lightgray;
+    color: black !important;
+    text-transform: uppercase;
+    font-size: 12px;
+    border-radius: 18px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+}
+.not-downloadable:hover {
+    background-color: lightgray;
+    color: black !important;
+    cursor: default;
+}
 .delete-btn {
     width: 70px;
     background-color: #E70808;
@@ -139,6 +154,12 @@ h6 {
     height: 85px;
     width: 85px;
     border: 2px solid #3d59a8;
+}
+.profile-pic-resource  > img{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: 1px solid #3d59a8;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -246,4 +267,17 @@ ul {
 iframe{
     width: 100%;
     height: 35em;
+}
+.resource-card {
+    border: 0.5px solid #3d59a8 !important;
+    border-radius: 20px;
+    width: 100%;
+}
+.card-header{
+    border: transparent;
+    background-color: transparent;
+}
+.card-footer {
+    border: transparent;
+    background-color: transparent;
 }

@@ -51,10 +51,13 @@ namespace BandTogether.Services
                 {
                     var followingIds = teacher.Following.Select(t => t.Id);
                     var resources = ctx.Resources.ToList();
+                    var teacherResources = teacher.Resources;
 
-                    var publicResources = resources.Where(res => followingIds.Contains(res.TeacherId) && res.IsPublic).OrderByDescending(res => res.DateCreated).ToList();
+                    var publicResources = resources.Where(res => followingIds.Contains(res.TeacherId) && res.IsPublic);
 
-                    return _resourceHelper.GetResourceListItems(publicResources);
+                    var allPublicResources = publicResources.Concat(teacherResources).OrderByDescending(res => res.DateCreated).ToList();
+
+                    return _resourceHelper.GetResourceListItems(allPublicResources);
                 }
                 else
                     throw new InvalidOperationException();

@@ -26,13 +26,13 @@
             @Html.DisplayFor(model => model.NumberOfFollowers)
         </dt>
         <dd>
-            @Html.DisplayNameFor(model => model.NumberOfFollowers)
+            @Html.ActionLink("Followers", "Followers", "Teacher", new { id = Model.TeacherId }, null)
         </dd>
         <dt>
             @Html.DisplayFor(model => model.NumberOfFollowing)
         </dt>
         <dd>
-            @Html.DisplayNameFor(model => model.NumberOfFollowing)
+            @Html.ActionLink("Following", "Following", "Teacher", new { id = Model.TeacherId }, null)
         </dd>
     </dl>
     <div class="">
@@ -69,13 +69,12 @@
     <div class="">
         <div class="card-columns mt-4">
             @foreach (var item in Model.Resources)
-            { 
-                <div class="card">
-                    <div class="card-header">
-                        <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
-                    </div>
+            {
+                <div class="card resource-card">
                     <div class="card-body">
-                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                        <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
+                        <hr />
+                        <p><span class="font-weight-bold">Description: </span>@Html.DisplayFor(modelItem => item.Description)</p>
                     </div>
                     <div class="card-footer">
                         <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
@@ -87,29 +86,28 @@
 }
 else
 {
-    <div class="card-columns">
-        @foreach (var item in Model.Resources)
+<div class="card-columns">
+    @foreach (var item in Model.Resources)
+    {
+        if (item.IsPublic)
         {
-            if (item.IsPublic)
-            {
-                <div class="card">
-                    <div class="card-header">
-                        <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
-                    </div>
-                    <div class="card-body">
-                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
-                    </div>
-                    <div class="card-footer">
-                        <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
-                    </div>
+            <div class="card resource-card">
+                <div class="card-body">
+                    <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
+                    <hr />
+                    <p><span class="font-weight-bold">Description: </span>@Html.DisplayFor(modelItem => item.Description)</p>
                 </div>
-            }
-            else
-            {
-                continue;
-            }
+                <div class="card-footer">
+                    <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                </div>
+            </div>
         }
-    </div>
+        else
+        {
+            continue;
+        }
+    }
+</div>
 }
 
 @section Scripts{

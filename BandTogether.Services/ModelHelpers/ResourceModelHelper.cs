@@ -25,16 +25,11 @@ namespace BandTogether.Services.ModelHelpers
                 var resourceListItems = new List<ResourceListItem>();
                 foreach (var res in resources)
                 {
-                    resourceListItems.Add(new ResourceListItem
-                    {
-                        ResourceId = res.ResourceId,
-                        TeacherId = res.TeacherId,
-                        TeacherName = $"{res.Teacher.FirstName} {res.Teacher.LastName}",
-                        Title = res.Title,
-                        Description = res.Description,
-                        DateCreated = res.DateCreated,
-                        IsPublic = res.IsPublic
-                    });
+                    var name = $"{res.Teacher.FirstName} {res.Teacher.LastName}";
+                    var content = _fileHelper.GetFileContentType(res.Teacher.ProfilePicture);
+                    var data = _fileHelper.GetFileData(res.Teacher.ProfilePicture);
+
+                    resourceListItems.Add(new ResourceListItem(res.ResourceId, res.TeacherId, name, res.Title, res.Description, res.DateCreated, res.IsPublic, content, data));
                 }
                 return resourceListItems;
             }

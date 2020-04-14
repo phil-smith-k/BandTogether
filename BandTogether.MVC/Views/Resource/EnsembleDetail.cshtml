@@ -3,6 +3,19 @@
 @{
     ViewBag.Title = "EnsembleDetail";
 }
+@if (Model.IsDownloadable)
+{
+    <div class="clearfix">
+        @Html.ActionLink("Download Now", "Download", new { id = Model.FileId }, new { @class = "btn update-profile-btn float-right" })
+    </div>
+}
+else
+{
+    <div class="clearfix">
+        <a class="btn not-downloadable float-right">Not Available</a>
+    </div>
+}
+<hr />
 <div class="row">
     <div class="col-4">
         <h2>@Html.DisplayFor(model => model.Title)</h2>
@@ -39,7 +52,11 @@
         <h4>By: @Html.ActionLink(@Html.DisplayFor(modelItem => Model.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = Model.TeacherId }, null)</h4>
     </div>
     <div class="col-8">
-        <iframe src="@Url.Action("File", "Resource", new { id = Model.FileId })" type="@Model.ContentType" frameborder="0">
-        </iframe>
+        @if (Model.ContentType == "application/pdf")
+        {
+            <iframe src="@Url.Action("File", "Resource", new { id = Model.FileId })#toolbar=0" type="@Model.ContentType" frameborder="0">
+            </iframe>
+
+        }
     </div>
 </div>
