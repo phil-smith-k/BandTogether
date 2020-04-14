@@ -11,7 +11,7 @@
     var imgSrc = String.Format($"data:{contentType};base64,{base64}");
 }
 
-@{ Html.RenderPartial("AddResource"); }
+
 
 <hr />
 <div class="follow-header d-flex justify-content-between">
@@ -63,23 +63,55 @@
     </div>
 </div>
 <hr />
-<div class="card-columns">
-    @foreach (var item in Model.Resources)
-    {
-        <div class="card">
-            <div class="card-header">
-                <h5 class="card-title">@Html.DisplayFor(model => item.Title)</h5>
-            </div>
-            <div class="card-body">
-                @*<p class="card-text">@Html.DisplayFor(model => item.Description)</p>*@
-                @Html.ActionLink("See More", "Detail", "Resource", new { id = item.ResourceId }, new { @class = "btn btn-default" })
-            </div>
-            <div class="card-footer text-muted">
-                <p>@Html.DisplayFor(model => item.DateCreated)</p>
-            </div>
+@if (User.Identity.GetUserId() == Model.TeacherId)
+{
+    Html.RenderPartial("AddResource");
+    <div class="">
+        <div class="card-columns mt-4">
+            @foreach (var item in Model.Resources)
+            { 
+                <div class="card">
+                    <div class="card-header">
+                        <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                    </div>
+                </div>
+            }
         </div>
-    }
-</div>
+    </div>
+}
+else
+{
+    <div class="card-columns">
+        @foreach (var item in Model.Resources)
+        {
+            if (item.IsPublic)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                continue;
+            }
+        }
+    </div>
+}
+
 @section Scripts{
 
     <script>

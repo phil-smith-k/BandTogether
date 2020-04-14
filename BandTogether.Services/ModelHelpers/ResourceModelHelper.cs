@@ -213,15 +213,27 @@ namespace BandTogether.Services.ModelHelpers
 
         private TechniqueDetail BuildTechniqueDetail(TechniqueResource entity)
         {
-            return new TechniqueDetail(entity.ResourceId, entity.TeacherId, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, entity.Skill.ToString(), entity.Instrument.ToString(), entity.GradeLevel);
+            var name = $"{entity.Teacher.FirstName} {entity.Teacher.LastName}";
+            var data = _fileHelper.GetFileData(entity.File);
+            var content = _fileHelper.GetFileContentType(entity.File);
+
+            return new TechniqueDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Skill.ToString(), entity.Instrument.ToString(), entity.GradeLevel);
         }
         private EnsembleDetail BuildEnsembleDetail(EnsembleResource entity)
         {
-            return new EnsembleDetail(entity.ResourceId, entity.TeacherId, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, entity.Skill.ToString(), entity.Ensemble.ToString(), entity.GradeLevel);
+            var name = $"{entity.Teacher.FirstName} {entity.Teacher.LastName}";
+            var data = _fileHelper.GetFileData(entity.File);
+            var content = _fileHelper.GetFileContentType(entity.File);
+
+            return new EnsembleDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Skill.ToString(), entity.Ensemble.ToString(), entity.GradeLevel);
         }
         private TheoryDetail BuildTheoryDetail(TheoryResource entity)
         {
-            return new TheoryDetail(entity.ResourceId, entity.TeacherId, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, entity.Topic.ToString(), entity.GradeLevel);
+            var name = $"{entity.Teacher.FirstName} {entity.Teacher.LastName}";
+            var data = _fileHelper.GetFileData(entity.File);
+            var content = _fileHelper.GetFileContentType(entity.File);
+
+            return new TheoryDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Topic.ToString(), entity.GradeLevel);
         }
     }
 }

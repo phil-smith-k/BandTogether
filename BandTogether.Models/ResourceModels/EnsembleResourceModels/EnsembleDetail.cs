@@ -12,10 +12,11 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
     {
         public EnsembleDetail() { }
 
-        public EnsembleDetail(int resourceId, string teacherId, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string skill, string ensemble, int gradeLevel)
+        public EnsembleDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string type, byte[] data, string skill, string ensemble, int gradeLevel)
         {
             this.ResourceId = resourceId;
             this.TeacherId = teacherId;
+            this.TeacherName = name;
             this.Title = title; 
             this.Description = description;
             this.DateCreated = created;
@@ -23,6 +24,8 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
             this.IsDownloadable = isDownloadable;
             this.IsPublic = isPublic;
             this.FileId = fileId;
+            this.ContentType = type;
+            this.FileData = data;
             this.Skill = skill;
             this.Ensemble = ensemble;
             this.GradeLevel = gradeLevel;
@@ -30,6 +33,7 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
 
         public int ResourceId { get; set; }
         public string TeacherId { get; set; }
+        public string TeacherName { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
@@ -42,6 +46,8 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
         public bool IsDownloadable { get; set; }
         public bool IsPublic { get; set; }
         public int FileId { get; set; }
+        public string ContentType { get; set; }
+        public byte[] FileData { get; set; }
         public string Skill { get; set; }
         public string Ensemble { get; set; }
         public int GradeLevel { get; set; }

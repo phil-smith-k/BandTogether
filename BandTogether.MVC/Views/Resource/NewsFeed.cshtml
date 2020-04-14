@@ -4,13 +4,13 @@
     ViewBag.Title = "NewsFeed";
 }
 
-    <div class="d-flex flex-row justify-content-between">
-<h2 class="flex-fill">News Feed</h2>
-<input type="text" id="search-bar" class="flex-fill" placeholder="Search your feed...">
+<div class="d-flex flex-row justify-content-between">
+    <h2 class="flex-fill">News Feed</h2>
+    <input type="text" id="search-bar" class="flex-fill" placeholder="Search your feed...">
 
-    </div>
-    <hr />
-
+</div>
+<hr />
+@{Html.RenderPartial("AddResource"); }
 <div class="card-columns">
     @foreach (var item in Model)
     {

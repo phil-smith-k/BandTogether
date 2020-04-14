@@ -3,77 +3,43 @@
 @{
     ViewBag.Title = "EnsembleDetail";
 }
+<div class="row">
+    <div class="col-4">
+        <h2>@Html.DisplayFor(model => model.Title)</h2>
+        <p class="mb-0">Added: @Html.DisplayFor(model => model.DateCreated)</p>
+        @if (Model.DateModified != null)
+        {
+            <p>Updated: @Html.DisplayFor(model => model.DateModified)</p>
+        }
+        <hr />
+        <p class="font-weight-bold mb-0">
+            Description:
+        </p>
+        <p>@Html.DisplayFor(model => model.Description)</p>
 
-<h2>EnsembleDetail</h2>
-
-<div>
-    <h4>EnsembleDetail</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateCreated)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateCreated)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DateModified)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DateModified)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Skill)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Skill)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Ensemble)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ensemble)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.GradeLevel)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.GradeLevel)
-        </dd>
-
-    </dl>
+        @if (Model.IsDownloadable)
+        {
+            <p>
+                @Html.ActionLink("Download Now", "Download", new { id = Model.FileId })
+            </p>
+        }
+        <hr />
+        <div class="dl-horizontal">
+            <p>
+                <span class="font-weight-bold">@Html.DisplayNameFor(model => model.Ensemble):</span> @Html.DisplayFor(model => model.Ensemble)
+            </p>
+            <p>
+                <span class="font-weight-bold">@Html.DisplayNameFor(model => model.GradeLevel):</span> @Html.DisplayFor(model => model.GradeLevel)
+            </p>
+            <p>
+                <span class="font-weight-bold">@Html.DisplayNameFor(model => model.Skill): </span>@Html.DisplayFor(model => model.Skill)
+            </p>
+        </div>
+        <hr />
+        <h4>By: @Html.ActionLink(@Html.DisplayFor(modelItem => Model.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = Model.TeacherId }, null)</h4>
+    </div>
+    <div class="col-8">
+        <iframe src="@Url.Action("File", "Resource", new { id = Model.FileId })" type="@Model.ContentType" frameborder="0">
+        </iframe>
+    </div>
 </div>
-@if (Model.IsDownloadable)
-{
-    <p>
-        @Html.ActionLink("Download Now", "Download", new { id = Model.FileId })
-    </p>
-}
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

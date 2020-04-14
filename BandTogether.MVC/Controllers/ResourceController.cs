@@ -103,14 +103,29 @@ namespace BandTogether.MVC.Controllers
             }
         }
 
+        public ActionResult File(int id)
+        {
+            var service = CreateFileService();
+
+            var file = service.GetFileById(id);
+
+            return File(file.Data, file.ContentType);
+        }
+
         [HttpGet]
         public ActionResult Detail(int id)
         {
             var service = CreateResourceService();
             var model = service.GetResourceById(id);
 
+
             if (model is TechniqueDetail)
+            {
+                var technique = (TechniqueDetail)model;
+                var file = File(technique.FileData, technique.ContentType);
+                ViewBag.File = file;
                 return View("TechniqueDetail", model);
+            }
             else if (model is EnsembleDetail)
                 return View("EnsembleDetail", model);
             else
