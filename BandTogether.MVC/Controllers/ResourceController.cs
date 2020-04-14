@@ -1,4 +1,5 @@
-﻿using BandTogether.Models.ResourceModels.EnsembleResourceModels;
+﻿using BandTogether.Models.Interfaces;
+using BandTogether.Models.ResourceModels.EnsembleResourceModels;
 using BandTogether.Models.ResourceModels.TechniqueResourceModels;
 using BandTogether.Models.ResourceModels.TheoryResourceModels;
 using BandTogether.Services;
@@ -48,6 +49,7 @@ namespace BandTogether.MVC.Controllers
                 return View(model);
             }
         }
+
         [HttpGet]
         public ActionResult CreateEnsemble()
         {
@@ -55,7 +57,7 @@ namespace BandTogether.MVC.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateEnsemble(TheoryCreate model)
+        public ActionResult CreateEnsemble(EnsembleCreate model)
         {
             if (this.ModelState.IsValid)
             {
@@ -75,6 +77,7 @@ namespace BandTogether.MVC.Controllers
                 return View(model);
             }
         }
+
         [HttpGet]
         public ActionResult CreateTheory()
         {
@@ -112,6 +115,46 @@ namespace BandTogether.MVC.Controllers
             return File(file.Data, file.ContentType);
         }
 
+        public ActionResult EditTechnique(TechniqueEdit model)
+        {
+            var service = CreateResourceService();
+            if (service.UpdateResource(model))
+            {
+                return RedirectToAction("Detail", new { id = model.ResourceId });
+            }
+            else
+            {
+                return RedirectToAction("Detail", new { id = model.ResourceId });
+            }
+
+        }
+        public ActionResult EditEnsemble(EnsembleEdit model)
+        {
+            var service = CreateResourceService();
+            if (service.UpdateResource(model))
+            {
+                return RedirectToAction("Detail", new { id = model.ResourceId });
+            }
+            else
+            {
+                return RedirectToAction("Detail", new { id = model.ResourceId });
+            }
+
+        }
+        public ActionResult EditTheory(TheoryEdit model)
+        {
+            var service = CreateResourceService();
+            if (service.UpdateResource(model))
+            {
+                return RedirectToAction("Detail", new { id = model.ResourceId });
+            }
+            else
+            {
+                return RedirectToAction("Detail", new { id = model.ResourceId });
+            }
+
+        }
+
         [HttpGet]
         public ActionResult Detail(int id)
         {
@@ -145,6 +188,20 @@ namespace BandTogether.MVC.Controllers
             };
             Response.AppendHeader("Content-Disposition", cd.ToString());
             return File(file.Data, file.ContentType);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var service = CreateResourceService();
+            if (service.DeleteResource(id))
+            {
+                return RedirectToAction("Detail", "Teacher", new { id = this.User.Identity.GetUserId() });
+            }
+            else
+            {
+                return RedirectToAction("Detail", "Teacher", new { id = this.User.Identity.GetUserId() });
+            }
         }
 
         private ResourceService CreateResourceService()

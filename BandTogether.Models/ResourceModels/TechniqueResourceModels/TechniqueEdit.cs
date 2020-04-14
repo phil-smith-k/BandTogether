@@ -11,12 +11,26 @@ using System.Web;
 
 namespace BandTogether.Models.ResourceModels.TechniqueResourceModels
 {
-    public class TechniqueCreate : IResourceCreate
+    public class TechniqueEdit : IResourceEdit
     {
-        private bool _isDownloadable;
-        private bool _isPublic;
+        public TechniqueEdit() { }
+
+        public TechniqueEdit(string teacherId, int resourceId, string title, string description, bool isDownloadable, bool isPublic, Instrument instrument, MusicalSkill skill, int level)
+        {
+            this.TeacherId = teacherId;
+            this.ResourceId = resourceId;
+            this.Title = title;
+            this.Description = description;
+            this.IsDownloadable = isDownloadable;
+            this.IsPublic = isPublic;
+            this.Instrument = instrument;
+            this.Skill = skill;
+            this.GradeLevel = level;
+        }
 
         public string TeacherId { get; set; }
+
+        public int ResourceId { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -25,47 +39,10 @@ namespace BandTogether.Models.ResourceModels.TechniqueResourceModels
         public string Description { get; set; }
 
         [Display(Name = "Let others download?")]
-        public bool TechniqueIsDownloadable
-        {
-            get => _isDownloadable;
-            set
-            {
-                _isDownloadable = value;
-            }
-        }
-
-        public bool IsDownloadable
-        {
-            get => _isDownloadable;
-            set
-            {
-                _isDownloadable = value;
-            }
-        }
+        public bool IsDownloadable { get; set; }
 
         [Display(Name = "Make it public?")]
-        public bool TechniqueIsPublic
-        {
-            get => _isPublic;
-            set
-            {
-                _isPublic = value;
-            }
-        }
-
-        public bool IsPublic
-        {
-            get => _isPublic;
-            set
-            {
-                _isPublic = value;
-            }
-        }
-
-        [Required]
-        [Display(Name = "File")]
-        [DataType(DataType.Upload)]
-        public HttpPostedFileBase File { get; set; }
+        public bool IsPublic { get; set; }
 
         [Required]
         [EnumDataType(typeof(Instrument))]
@@ -77,7 +54,12 @@ namespace BandTogether.Models.ResourceModels.TechniqueResourceModels
 
         [Required]
         [Display(Name = "Grade Level")]
-        [Range(4,12)]
+        [Range(4, 12)]
         public int GradeLevel { get; set; }
+
+        [Required]
+        [Display(Name = "File")]
+        [DataType(DataType.Upload)]
+        public HttpPostedFileBase File { get; set; }
     }
 }

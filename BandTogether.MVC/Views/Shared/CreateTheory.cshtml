@@ -3,10 +3,6 @@
 @{
     ViewBag.Title = "CreateTheory";
 }
-
-
-
-
 @using (Html.BeginForm("CreateTheory", "Resource", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -19,15 +15,12 @@
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <div class="">
                 @Html.TextAreaFor(model => model.Description, htmlAttributes: new { @class = "form-control", placeholder = "Description" })
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-
-
         <div class="form-group">
             <div class="">
                 @Html.EnumDropDownListFor(model => model.Topic, "-- Select A Topic", htmlAttributes: new { @class = "form-control" })
@@ -43,25 +36,24 @@
         </div>
         <div class="form-group ml-5">
             <div class="custom-control custom-checkbox">
-                @Html.EditorFor(model => model.IsDownloadable, new { htmlAttributes = new { @class = "custom-control-input ml-2" } })
-                @Html.LabelFor(model => model.IsDownloadable, htmlAttributes: new { @class = "custom-control-label" })
-                @Html.ValidationMessageFor(model => model.IsDownloadable, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TheoryIsDownloadable, new { htmlAttributes = new { @class = "custom-control-input ml-2" } })
+                @Html.LabelFor(model => model.TheoryIsDownloadable, htmlAttributes: new { @class = "custom-control-label" })
+                @Html.ValidationMessageFor(model => model.TheoryIsDownloadable, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group ml-5">
             <div class="custom-control custom-checkbox">
-                @Html.EditorFor(model => model.IsPublic, new { htmlAttributes = new { @class = "custom-control-input" } })
-                @Html.LabelFor(model => model.IsPublic, htmlAttributes: new { @class = "custom-control-label" })
-                @Html.ValidationMessageFor(model => model.IsPublic, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TheoryIsPublic, new { htmlAttributes = new { @class = "custom-control-input" } })
+                @Html.LabelFor(model => model.TheoryIsPublic, htmlAttributes: new { @class = "custom-control-label" })
+                @Html.ValidationMessageFor(model => model.TheoryIsPublic, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <div class="">
-                <label for="File" class="btn unfollow-btn mt-3 ml-4 mb-3" style="display: block;">
+                <label for="TheoryFile" class="btn unfollow-btn mt-3 ml-4 mb-3" style="display: block;">
                     Browse
                 </label>
-                <input type="file" id="File" name="File" value="File" />
+                <input type="file" id="TheoryFile" name="File" value="File" />
                 @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
             </div>
         </div>

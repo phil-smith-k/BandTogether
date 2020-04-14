@@ -1,10 +1,7 @@
-﻿@model BandTogether.Models.SchoolModels.SchoolDetail
+﻿@model BandTogether.Models.ResourceModels.ResourceDelete
 
-@{
-    var schoolId = ViewData["schoolId"];
-}
-<button type="button" class="btn delete-btn" data-toggle="modal" data-target="#delete-school-@Html.Raw(schoolId)">Remove</button>
-<div class="modal fade" id="delete-school-@Html.Raw(schoolId)" tabindex="-1" role="dialog">
+<button type="button" class="btn delete-btn" data-toggle="modal" data-target="#delete-technique">Remove</button>
+<div class="modal fade" id="delete-technique" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,17 +11,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("DeleteSchool", "School", new { id = Model.SchoolId }, FormMethod.Post, null))
+                @using (Html.BeginForm("Delete", "Resource", new { id = Model.ResourceId }, FormMethod.Post, null))
                 {
-
-                    <a class="font-weight-bold school-name" style="cursor: pointer;">@Html.DisplayFor(modelItem => Model.SchoolName)</a>
-                    <div class="address">
-                        @Html.DisplayFor(modelItem => Model.StreetAddress)<br />
-                        @Html.DisplayFor(modelItem => Model.City),
-                        @Html.DisplayFor(modelItem => Model.State) @Html.DisplayFor(modelItem => Model.ZipCode)<br />
-                        Grades: @Html.DisplayFor(modelItem => Model.LowestGrade)-@Html.DisplayFor(modelItem => Model.HighestGrade)<br />
+                    <div class="ml-4">
+                        <h5 class="font-weight-bold school-name" style="cursor: pointer;">@Html.DisplayFor(modelItem => Model.Title)</h5>
+                        <p class="">Added: @Html.DisplayFor(model => model.DateCreated)</p>
+                        <p class="font-weight-bold mb-0">
+                            Description:
+                        </p>
+                        <p>@Html.DisplayFor(model => model.Description)</p>
                     </div>
-
                     <div class="form-group">
                         <div class="">
                             <input type="submit" value="Remove" class="btn delete-btn float-right" />
@@ -53,4 +49,3 @@
         }
     </script>
 }
-

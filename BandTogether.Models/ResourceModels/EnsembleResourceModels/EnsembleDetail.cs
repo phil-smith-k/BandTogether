@@ -1,4 +1,5 @@
-﻿using BandTogether.Models.Interfaces;
+﻿using BandTogether.Data.Entities.Enumerations;
+using BandTogether.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +13,7 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
     {
         public EnsembleDetail() { }
 
-        public EnsembleDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string type, byte[] data, string skill, string ensemble, int gradeLevel)
+        public EnsembleDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string type, byte[] data, MusicalSkill skill, EnsembleType ensemble, int gradeLevel)
         {
             this.ResourceId = resourceId;
             this.TeacherId = teacherId;
@@ -48,8 +49,8 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
         public int FileId { get; set; }
         public string ContentType { get; set; }
         public byte[] FileData { get; set; }
-        public string Skill { get; set; }
-        public string Ensemble { get; set; }
+        public MusicalSkill Skill { get; set; }
+        public EnsembleType Ensemble { get; set; }
         public int GradeLevel { get; set; }
     }
 }

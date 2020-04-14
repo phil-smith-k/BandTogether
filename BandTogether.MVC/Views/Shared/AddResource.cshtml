@@ -1,11 +1,18 @@
 ﻿@using BandTogether.Models.ResourceModels.EnsembleResourceModels;
 @using BandTogether.Models.ResourceModels.TheoryResourceModels;
 @using BandTogether.Models.ResourceModels.TechniqueResourceModels;
-    <div class="clearfix">
 
-<button id="add-resource" type="button" class="btn update-profile-btn float-right" data-toggle="modal" data-target="#myModal">Add Resource</button>
-    </div>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+@{ 
+    var technique = new TechniqueCreate();
+    var ensemble = new EnsembleCreate();
+    var theory = new TheoryCreate();
+}
+
+<div class="clearfix">
+
+    <button id="add-resource" type="button" class="btn update-profile-btn float-right" data-toggle="modal" data-target="#technique">Add Resource</button>
+</div>
+<div class="modal" id="technique" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
@@ -16,13 +23,13 @@
                     </button>
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active nav-item">
-                            <a href="#technique" aria-controls="techniqueTab" role="tab" data-toggle="tab" class="nav-link">Instrument</a>
+                            <a id="#technique-tab" data-target="#technique" aria-controls="techniqueTab" role="tab" data-dismiss="modal" data-toggle="modal" class="nav-link">Instrument</a>
                         </li>
                         <li role="presentation" class="nav-item">
-                            <a href="#ensemble" aria-controls="ensembleTab" role="tab" data-toggle="tab" class="nav-link">Ensemble</a>
+                            <a id="#ensemble-tab" data-target="#ensemble" aria-controls="ensembleTab" role="tab" data-dismiss="modal" data-toggle="modal" class="nav-link">Ensemble</a>
                         </li>
                         <li role="presentation" class="nav-item">
-                            <a href="#theory" aria-controls="theoryTab" role="tab" data-toggle="tab" class="nav-link">Music Theory</a>
+                            <a id="#theory-tab" data-target="#theory" aria-controls="theoryTab" role="tab" data-dismiss="modal" data-toggle="modal" class="nav-link">Music Theory</a>
                         </li>
                     </ul>
                     <hr />
@@ -30,13 +37,73 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="technique">
-                            @{ Html.RenderPartial("CreateTechnique", new TechniqueCreate()); }
+                            @Html.Partial("CreateTechnique", technique)
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="ensemble">
-                            @{ Html.RenderPartial("CreateEnsemble", new EnsembleCreate()); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="ensemble" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="nav-item">
+                            <a id="#technique-tab" data-target="#technique" aria-controls="techniqueTab" role="tab" data-dismiss="modal" data-toggle="modal" class="nav-link">Instrument</a>
+                        </li>
+                        <li role="presentation" class="active nav-item">
+                            <a id="#ensemble-tab" data-target="#ensemble" aria-controls="ensembleTab" role="tab" data-dismiss="modal" data-toggle="modal" class="nav-link">Ensemble</a>
+                        </li>
+                        <li role="presentation" class="nav-item">
+                            <a id="#theory-tab" data-target="#theory" aria-controls="theoryTab" role="tab" data-dismiss="modal" data-toggle="modal" class="nav-link">Music Theory</a>
+                        </li>
+                    </ul>
+                    <hr />
+                    <h4 class="modal-title" style="margin: 1em 0 1em 1em;"></h4>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="ensemble">
+                            @Html.Partial("CreateEnsemble", ensemble)
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="theory">
-                            @{ Html.RenderPartial("CreateTheory", new TheoryCreate()); }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="theory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <button type="button" class="close float-right" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="nav-item">
+                            <a id="#technique-tab" data-target="#technique" aria-controls="techniqueTab" role="tab" data-dismiss="modal" data-toggle="modal" class="nav-link">Instrument</a>
+                        </li>
+                        <li role="presentation" class="nav-item">
+                            <a id="#ensemble-tab" data-target="#ensemble" aria-controls="ensembleTab" role="tab" data-dismiss="modal" data-toggle="modal" class="nav-link">Ensemble</a>
+                        </li>
+                        <li role="presentation" class="active nav-item">
+                            <a id="#theory-tab" data-target="#theory" aria-controls="theoryTab" role="tab" data-dismiss="modal" data-toggle="modal" class="nav-link">Music Theory</a>
+                        </li>
+                    </ul>
+                    <hr />
+                    <h4 class="modal-title" style="margin: 1em 0 1em 1em;"></h4>
+                    <!-- Tab panes -->
+                    <div class="modal-body">
+                        <div class="active" id="theory">
+                            @Html.Partial("CreateTheory", theory)
                         </div>
                     </div>
                 </div>
@@ -45,6 +112,6 @@
     </div>
 </div>
 @section Scripts{
-
-
+    @Scripts.Render("~/bundles/jqueryval")
 }
+

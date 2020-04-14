@@ -281,3 +281,10 @@ iframe{
     border: transparent;
     background-color: transparent;
 }
+.not-available{
+    border: 2px solid gray;
+    height: 35em;
+    padding: 10em 3em;
+    width: 100%;
+    border-radius: 15px;
+}

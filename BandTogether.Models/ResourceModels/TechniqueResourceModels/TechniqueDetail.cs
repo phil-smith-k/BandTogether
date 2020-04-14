@@ -1,4 +1,6 @@
-﻿using BandTogether.Models.Interfaces;
+﻿using BandTogether.Data.Entities;
+using BandTogether.Data.Entities.Enumerations;
+using BandTogether.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,7 +14,7 @@ namespace BandTogether.Models.ResourceModels.TechniqueResourceModels
     {
         public TechniqueDetail() { }
 
-        public TechniqueDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string content, byte[] data, string skill, string instrument, int gradeLevel)
+        public TechniqueDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string content, byte[] data, MusicalSkill skill, Instrument instrument, int gradeLevel)
         {
             this.ResourceId = resourceId;
             this.TeacherId = teacherId;
@@ -48,8 +50,13 @@ namespace BandTogether.Models.ResourceModels.TechniqueResourceModels
         public int FileId { get; set; }
         public string ContentType { get; set; }
         public byte[] FileData { get; set; }
-        public string Skill { get; set; }
-        public string Instrument { get; set; }
+
+        [EnumDataType(typeof(MusicalSkill))]
+        public MusicalSkill Skill { get; set; }
+
+        [EnumDataType(typeof(Instrument))]
+        public Instrument Instrument { get; set; }
+
         [Display(Name = "Grade Level")]
         public int GradeLevel { get; set; }
     }

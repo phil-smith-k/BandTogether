@@ -154,6 +154,24 @@ namespace BandTogether.Services.ModelHelpers
             else
                 return BuildTheoryDetail((TheoryResource)entity);
         }
+        public void UpdateResourceEntity(IResourceEdit model, Resource entity)
+        {
+            if (model is TechniqueEdit)
+            {
+                var technique = (TechniqueEdit)model;
+                UpdateTechniqueResourceEntity(technique, (TechniqueResource)entity);
+            }
+            else if (model is EnsembleEdit)
+            {
+                var ensemble = (EnsembleEdit)model;
+                UpdateEnsembleResourceEntity(ensemble, (EnsembleResource)entity);
+            }
+            else
+            {
+                var theory = (TheoryEdit)model;
+                UpdateTheoryResourceEntity(theory, (TheoryResource)entity);
+            }
+        }
 
         private EnsembleResource BuildEnsembleResource(EnsembleCreate model)
         {
@@ -212,7 +230,7 @@ namespace BandTogether.Services.ModelHelpers
             var data = _fileHelper.GetFileData(entity.File);
             var content = _fileHelper.GetFileContentType(entity.File);
 
-            return new TechniqueDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Skill.ToString(), entity.Instrument.ToString(), entity.GradeLevel);
+            return new TechniqueDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Skill, entity.Instrument, entity.GradeLevel);
         }
         private EnsembleDetail BuildEnsembleDetail(EnsembleResource entity)
         {
@@ -220,7 +238,7 @@ namespace BandTogether.Services.ModelHelpers
             var data = _fileHelper.GetFileData(entity.File);
             var content = _fileHelper.GetFileContentType(entity.File);
 
-            return new EnsembleDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Skill.ToString(), entity.Ensemble.ToString(), entity.GradeLevel);
+            return new EnsembleDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Skill, entity.Ensemble, entity.GradeLevel);
         }
         private TheoryDetail BuildTheoryDetail(TheoryResource entity)
         {
@@ -228,7 +246,55 @@ namespace BandTogether.Services.ModelHelpers
             var data = _fileHelper.GetFileData(entity.File);
             var content = _fileHelper.GetFileContentType(entity.File);
 
-            return new TheoryDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Topic.ToString(), entity.GradeLevel);
+            return new TheoryDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Topic, entity.GradeLevel);
+        }
+
+        private void UpdateTechniqueResourceEntity(TechniqueEdit model, TechniqueResource entity)
+        {
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.DateModified = DateTimeOffset.Now;
+            entity.IsDownloadable = model.IsDownloadable;
+            entity.IsPublic = model.IsPublic;
+            entity.Instrument = model.Instrument;
+            entity.Skill = model.Skill;
+            entity.GradeLevel = model.GradeLevel;
+
+            if (model.File != null)
+            {
+                entity.File = _fileHelper.BuildResourceFile(model.File);
+            }
+        }
+        private void UpdateEnsembleResourceEntity(EnsembleEdit model, EnsembleResource entity)
+        {
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.DateModified = DateTimeOffset.Now;
+            entity.IsDownloadable = model.IsDownloadable;
+            entity.IsPublic = model.IsPublic;
+            entity.Ensemble = model.Ensemble;
+            entity.Skill = model.Skill;
+            entity.GradeLevel = model.GradeLevel;
+
+            if (model.File != null)
+            {
+                entity.File = _fileHelper.BuildResourceFile(model.File);
+            }
+        }
+        private void UpdateTheoryResourceEntity(TheoryEdit model, TheoryResource entity)
+        {
+            entity.Title = model.Title;
+            entity.Description = model.Description;
+            entity.DateModified = DateTimeOffset.Now;
+            entity.IsDownloadable = model.IsDownloadable;
+            entity.IsPublic = model.IsPublic;
+            entity.Topic = model.Topic;
+            entity.GradeLevel = model.GradeLevel;
+
+            if (model.File != null)
+            {
+                entity.File = _fileHelper.BuildResourceFile(model.File);
+            }
         }
     }
 }

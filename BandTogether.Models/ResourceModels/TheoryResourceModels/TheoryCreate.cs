@@ -12,6 +12,10 @@ namespace BandTogether.Models.ResourceModels.TheoryResourceModels
 {
     public class TheoryCreate : IResourceCreate
     {
+
+        private bool _isDownloadable;
+        private bool _isPublic;
+
         public string TeacherId { get; set; }
 
         [Required]
@@ -21,10 +25,42 @@ namespace BandTogether.Models.ResourceModels.TheoryResourceModels
         public string Description { get; set; }
 
         [Display(Name = "Let others download?")]
-        public bool IsDownloadable { get; set; }
+        public bool TheoryIsDownloadable
+        {
+            get => _isDownloadable;
+            set
+            {
+                _isDownloadable = value;
+            }
+        }
+
+        public bool IsDownloadable
+        {
+            get => _isDownloadable;
+            set
+            {
+                _isDownloadable = value;
+            }
+        }
 
         [Display(Name = "Make it public?")]
-        public bool IsPublic { get; set; }
+        public bool TheoryIsPublic
+        {
+            get => _isPublic;
+            set
+            {
+                _isPublic = value;
+            }
+        }
+
+        public bool IsPublic
+        {
+            get => _isPublic;
+            set
+            {
+                _isPublic = value;
+            }
+        }
 
         [Required]
         [Display(Name = "File")]

@@ -1,4 +1,7 @@
 ﻿@model BandTogether.Models.ResourceModels.EnsembleResourceModels.EnsembleDetail
+@using BandTogether.Models.ResourceModels.EnsembleResourceModels;
+@using BandTogether.Models.ResourceModels;
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "EnsembleDetail";
@@ -11,9 +14,19 @@
 }
 else
 {
-    <div class="clearfix">
-        <a class="btn not-downloadable float-right">Not Available</a>
-    </div>
+    if (User.Identity.GetUserId() == Model.TeacherId)
+    {
+        <div class="clearfix">
+            @Html.ActionLink("Download Now", "Download", new { id = Model.FileId }, new { @class = "btn update-profile-btn float-right" })
+        </div>
+    }
+    else
+    {
+        <div class="clearfix">
+            <a class="btn not-downloadable float-right">Not Available</a>
+        </div>
+    }
+
 }
 <hr />
 <div class="row">
@@ -29,13 +42,6 @@ else
             Description:
         </p>
         <p>@Html.DisplayFor(model => model.Description)</p>
-
-        @if (Model.IsDownloadable)
-        {
-            <p>
-                @Html.ActionLink("Download Now", "Download", new { id = Model.FileId })
-            </p>
-        }
         <hr />
         <div class="dl-horizontal">
             <p>
@@ -49,14 +55,57 @@ else
             </p>
         </div>
         <hr />
-        <h4>By: @Html.ActionLink(@Html.DisplayFor(modelItem => Model.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = Model.TeacherId }, null)</h4>
-    </div>
-    <div class="col-8">
-        @if (Model.ContentType == "application/pdf")
+        <h5>@Html.ActionLink(@Html.DisplayFor(modelItem => Model.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = Model.TeacherId }, null)</h5>
+        @if (User.Identity.GetUserId() == Model.TeacherId)
         {
-            <iframe src="@Url.Action("File", "Resource", new { id = Model.FileId })#toolbar=0" type="@Model.ContentType" frameborder="0">
-            </iframe>
-
+            Html.RenderPartial("EnsembleEdit", new EnsembleEdit(Model.TeacherId, Model.ResourceId, Model.Title, Model.Description, Model.IsDownloadable, Model.IsPublic, Model.Ensemble, Model.Skill, Model.GradeLevel));
+            Html.RenderPartial("DeleteResource", new ResourceDelete(Model.ResourceId, Model.TeacherId, Model.Title, Model.Description, Model.DateCreated));
         }
     </div>
+    <div class="col-8">
+        @{
+
+            if (User.Identity.GetUserId() == Model.TeacherId)
+            {
+
+                if (Model.ContentType == "application/pdf" || Model.ContentType == "pdf")
+                {
+
+                    <iframe src="@Url.Action("File", "Resource", new { id = Model.FileId })#toolbar=0" type="@Model.ContentType" frameborder="0"></iframe>
+                }
+                else
+                {
+                    <div class="not-available text-center">
+                        <p class="font-weight-bold">PDF is the only document type supported by preview at this time.  Update to PDF to be able to preview.</p>
+                    </div>
+                }
+            }
+            else
+            {
+                if (!Model.IsDownloadable)
+                {
+                    <div class="not-available text-center">
+                        <p class="font-weight-bold">@Html.DisplayFor(model => model.TeacherName) is not allowing users to download this resource at this time. Please check back later or contact them directly.</p>
+                    </div>
+                }
+                else if (Model.ContentType != "application/pdf" || Model.ContentType != "pdf")
+                {
+                    <div class="not-available text-center">
+                        <p class="font-weight-bold">PDFs are the only document supported by preview at this time. Download the document to view.</p>
+                    </div>
+                }
+                else
+                {
+                    <iframe src="@Url.Action("File", "Resource", new { id = Model.FileId })#toolbar=0" type="@Model.ContentType" frameborder="0"></iframe>
+                }
+            }
+        }
+
+
+    </div>
 </div>
+
+@section Scripts{
+
+}
+

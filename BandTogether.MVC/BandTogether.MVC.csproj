@@ -380,6 +380,11 @@
     <Content Include="Views\Shared\AddResource.cshtml" />
     <Content Include="Views\Teacher\Followers.cshtml" />
     <Content Include="Views\Teacher\Following.cshtml" />
+    <Content Include="Views\Shared\TechniqueEdit.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Enum.cshtml" />
+    <Content Include="Views\Shared\EnsembleEdit.cshtml" />
+    <Content Include="Views\Shared\TheoryEdit.cshtml" />
+    <Content Include="Views\Shared\DeleteResource.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

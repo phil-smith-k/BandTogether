@@ -79,6 +79,38 @@ namespace BandTogether.Services
             }
         }
         //____________________________________________UPDATE
+        public bool UpdateResource(IResourceEdit model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Resources.Find(model.ResourceId);
+
+                if (entity != null)
+                {
+                    _resourceHelper.UpdateResourceEntity(model, entity);
+                    return ctx.SaveChanges() == 2;
+                }
+                return false;
+            }
+        }
         //____________________________________________DELETE
+        public bool DeleteResource(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity = ctx.Resources.Find(id);
+                if (entity != null)
+                {
+                    ctx.ResourceFiles.Remove(entity.File);
+                    ctx.Resources.Remove(entity);
+                    var numberOfChanges = ctx.SaveChanges();
+                    return numberOfChanges == 3;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }

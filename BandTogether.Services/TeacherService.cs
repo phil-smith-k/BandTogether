@@ -22,7 +22,7 @@ namespace BandTogether.Services
         {
             _currentUser = currentUserId;
         }
-        //____________________________________________CREATE
+
         //______________________________________________READ
         public IEnumerable<TeacherListItem> GetAllTeachers()
         {
@@ -155,8 +155,5 @@ namespace BandTogether.Services
                     return false;
             }
         }
-        //____________________________________________DELETE
-
-
     }
 }
