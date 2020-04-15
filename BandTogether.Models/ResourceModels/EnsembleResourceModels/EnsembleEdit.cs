@@ -14,7 +14,7 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
     {
         public EnsembleEdit() { }
 
-        public EnsembleEdit(string teacherId, int resourceId, string title, string description, bool isDownloadable, bool isPublic, EnsembleType ensemble, MusicalSkill skill, int level)
+        public EnsembleEdit(string teacherId, int resourceId, string title, string description, bool isDownloadable, bool isPublic, EnsembleType ensemble, MusicalSkill skill, int level, string fileName)
         {
             this.TeacherId = teacherId;
             this.ResourceId = resourceId;
@@ -25,6 +25,7 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
             this.Ensemble = ensemble;
             this.Skill = skill;
             this.GradeLevel = level;
+            this.FileName = fileName;
         }
 
         public string TeacherId { get; set; }
@@ -60,5 +61,7 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
         [Display(Name = "File")]
         [DataType(DataType.Upload)]
         public HttpPostedFileBase File { get; set; }
+
+        public string FileName { get; set; }
     }
 }

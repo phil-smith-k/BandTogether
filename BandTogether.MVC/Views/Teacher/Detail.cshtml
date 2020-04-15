@@ -10,6 +10,24 @@
     var contentType = Model.ContentType;
     var imgSrc = String.Format($"data:{contentType};base64,{base64}");
 }
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["ErrorMessage"]
+    </div>
+}
 <hr />
 <div class="follow-header d-flex justify-content-between">
     <dl class="">
@@ -83,37 +101,46 @@
 }
 else
 {
-<div class="card-columns">
-    @foreach (var item in Model.Resources)
-    {
-        if (item.IsPublic)
+    <div class="card-columns mt-4">
+        @foreach (var item in Model.Resources)
         {
-            <div class="card resource-card">
-                <div class="card-body">
-                    <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
-                    <hr />
-                    <p><span class="font-weight-bold">Description: </span>@Html.DisplayFor(modelItem => item.Description)</p>
+            if (item.IsPublic)
+            {
+                <div class="card resource-card">
+                    <div class="card-body">
+                        <h6>@Html.ActionLink(@Html.DisplayFor(modelItem => item.Title).ToHtmlString(), "Detail", "Resource", new { id = item.ResourceId }, null)</h6>
+                        <hr />
+                        <p><span class="font-weight-bold">Description: </span>@Html.DisplayFor(modelItem => item.Description)</p>
+                    </div>
+                    <div class="card-footer">
+                        <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
+                    </div>
                 </div>
-                <div class="card-footer">
-                    <p class="float-right">@Html.DisplayFor(modelItem => item.DateCreated)</p>
-                </div>
-            </div>
+            }
+            else
+            {
+                continue;
+            }
         }
-        else
-        {
-            continue;
-        }
-    }
-</div>
+    </div>
 }
-@section Scripts{
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
     <script>
-        const tabs = document.querySelectorAll(".nav-link");
-        const title = document.querySelector(".modal-title");
-        title.textContent = "New Instrument Resource";
-        tabs.forEach(t => t.addEventListener("click", function () {
-            title.textContent = "New " + this.textContent + " Resource";
-        }));
+        $('#TechniqueFile').change(function () {
+            var i = $(this).prev('div').clone();
+            var file = $('#TechniqueFile')[0].files[0].name;
+            $(this).prev('div').text(file);
+        });
+        $('#EnsembleFile').change(function () {
+            var i = $(this).prev('div').clone();
+            var file = $('#EnsembleFile')[0].files[0].name;
+            $(this).prev('div').text(file);
+        });
+        $('#TheoryFile').change(function () {
+            var i = $(this).prev('div').clone();
+            var file = $('#TheoryFile')[0].files[0].name;
+            $(this).prev('div').text(file);
+        });
     </script>
 }

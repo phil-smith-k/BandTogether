@@ -23,7 +23,8 @@ namespace BandTogether.Services.ModelHelpers
             else
             {
                 var resourceListItems = new List<ResourceListItem>();
-                foreach (var res in resources)
+                var orderedResources = resources.OrderByDescending(res => res.DateCreated);
+                foreach (var res in orderedResources)
                 {
                     var name = $"{res.Teacher.FirstName} {res.Teacher.LastName}";
                     var content = _fileHelper.GetFileContentType(res.Teacher.ProfilePicture);
@@ -154,22 +155,25 @@ namespace BandTogether.Services.ModelHelpers
             else
                 return BuildTheoryDetail((TheoryResource)entity);
         }
-        public void UpdateResourceEntity(IResourceEdit model, Resource entity)
+        public bool UpdateResourceEntity(IResourceEdit model, Resource entity)
         {
             if (model is TechniqueEdit)
             {
                 var technique = (TechniqueEdit)model;
-                UpdateTechniqueResourceEntity(technique, (TechniqueResource)entity);
+                UpdateTechniqueResourceEntity(technique, (TechniqueResource)entity, out bool wasFileChanged);
+                return wasFileChanged;
             }
             else if (model is EnsembleEdit)
             {
                 var ensemble = (EnsembleEdit)model;
-                UpdateEnsembleResourceEntity(ensemble, (EnsembleResource)entity);
+                UpdateEnsembleResourceEntity(ensemble, (EnsembleResource)entity, out bool wasFileChanged);
+                return wasFileChanged;
             }
             else
             {
                 var theory = (TheoryEdit)model;
-                UpdateTheoryResourceEntity(theory, (TheoryResource)entity);
+                UpdateTheoryResourceEntity(theory, (TheoryResource)entity, out bool wasFileChanged);
+                return wasFileChanged;
             }
         }
 
@@ -229,28 +233,32 @@ namespace BandTogether.Services.ModelHelpers
             var name = $"{entity.Teacher.FirstName} {entity.Teacher.LastName}";
             var data = _fileHelper.GetFileData(entity.File);
             var content = _fileHelper.GetFileContentType(entity.File);
+            var fileName = _fileHelper.GetFileName(entity.File);
 
-            return new TechniqueDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Skill, entity.Instrument, entity.GradeLevel);
+            return new TechniqueDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, fileName, entity.Skill, entity.Instrument, entity.GradeLevel);
         }
         private EnsembleDetail BuildEnsembleDetail(EnsembleResource entity)
         {
             var name = $"{entity.Teacher.FirstName} {entity.Teacher.LastName}";
             var data = _fileHelper.GetFileData(entity.File);
             var content = _fileHelper.GetFileContentType(entity.File);
+            var fileName = _fileHelper.GetFileName(entity.File);
 
-            return new EnsembleDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Skill, entity.Ensemble, entity.GradeLevel);
+            return new EnsembleDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, fileName, entity.Skill, entity.Ensemble, entity.GradeLevel);
         }
         private TheoryDetail BuildTheoryDetail(TheoryResource entity)
         {
             var name = $"{entity.Teacher.FirstName} {entity.Teacher.LastName}";
             var data = _fileHelper.GetFileData(entity.File);
             var content = _fileHelper.GetFileContentType(entity.File);
+            var fileName = _fileHelper.GetFileName(entity.File);
 
-            return new TheoryDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, entity.Topic, entity.GradeLevel);
+            return new TheoryDetail(entity.ResourceId, entity.TeacherId, name, entity.Title, entity.Description, entity.DateCreated, entity.DateModified, entity.IsDownloadable, entity.IsPublic, entity.File.FileId, content, data, fileName, entity.Topic, entity.GradeLevel);
         }
 
-        private void UpdateTechniqueResourceEntity(TechniqueEdit model, TechniqueResource entity)
+        private void UpdateTechniqueResourceEntity(TechniqueEdit model, TechniqueResource entity, out bool wasFileChanged)
         {
+            wasFileChanged = false;
             entity.Title = model.Title;
             entity.Description = model.Description;
             entity.DateModified = DateTimeOffset.Now;
@@ -263,10 +271,12 @@ namespace BandTogether.Services.ModelHelpers
             if (model.File != null)
             {
                 entity.File = _fileHelper.BuildResourceFile(model.File);
+                wasFileChanged = true;
             }
         }
-        private void UpdateEnsembleResourceEntity(EnsembleEdit model, EnsembleResource entity)
+        private void UpdateEnsembleResourceEntity(EnsembleEdit model, EnsembleResource entity, out bool wasFileChanged)
         {
+            wasFileChanged = false;
             entity.Title = model.Title;
             entity.Description = model.Description;
             entity.DateModified = DateTimeOffset.Now;
@@ -279,10 +289,12 @@ namespace BandTogether.Services.ModelHelpers
             if (model.File != null)
             {
                 entity.File = _fileHelper.BuildResourceFile(model.File);
+                wasFileChanged = true;
             }
         }
-        private void UpdateTheoryResourceEntity(TheoryEdit model, TheoryResource entity)
+        private void UpdateTheoryResourceEntity(TheoryEdit model, TheoryResource entity, out bool wasFileChanged)
         {
+            wasFileChanged = false;
             entity.Title = model.Title;
             entity.Description = model.Description;
             entity.DateModified = DateTimeOffset.Now;
@@ -294,6 +306,7 @@ namespace BandTogether.Services.ModelHelpers
             if (model.File != null)
             {
                 entity.File = _fileHelper.BuildResourceFile(model.File);
+                wasFileChanged = true;
             }
         }
     }

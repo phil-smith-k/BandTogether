@@ -6,9 +6,29 @@
 @{
     ViewBag.Title = "TechniqueDetail";
 }
+@if (TempData.ContainsKey("SaveResult"))
+{
+    <div class="alert alert-success" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["SaveResult"]
+    </div>
+}
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+            <span>&times;</span>
+        </button>
+        @TempData["ErrorMessage"]
+    </div>
+}
+
 @if (Model.IsDownloadable)
 {
     <div class="clearfix">
+        <h2 class="float-left">@Html.DisplayFor(model => model.Title)</h2>
         @Html.ActionLink("Download Now", "Download", new { id = Model.FileId }, new { @class = "btn update-profile-btn float-right" })
     </div>
 }
@@ -17,12 +37,14 @@ else
     if (User.Identity.GetUserId() == Model.TeacherId)
     {
         <div class="clearfix">
+            <h2 class="float-left">@Html.DisplayFor(model => model.Title)</h2>
             @Html.ActionLink("Download Now", "Download", new { id = Model.FileId }, new { @class = "btn update-profile-btn float-right" })
         </div>
     }
     else
     {
         <div class="clearfix">
+            <h2 class="float-left">@Html.DisplayFor(model => model.Title)</h2>
             <a class="btn not-downloadable float-right">Not Available</a>
         </div>
     }
@@ -31,7 +53,6 @@ else
 <hr />
 <div class="row">
     <div class="col-4">
-        <h2>@Html.DisplayFor(model => model.Title)</h2>
         <p class="mb-0">Added: @Html.DisplayFor(model => model.DateCreated)</p>
         @if (Model.DateModified != null)
         {
@@ -60,7 +81,7 @@ else
         <h5>@Html.ActionLink(@Html.DisplayFor(modelItem => Model.TeacherName).ToHtmlString(), "Detail", "Teacher", new { id = Model.TeacherId }, null)</h5>
         @if (User.Identity.GetUserId() == Model.TeacherId)
         {
-            Html.RenderPartial("TechniqueEdit", new TechniqueEdit(Model.TeacherId, Model.ResourceId, Model.Title, Model.Description, Model.IsDownloadable, Model.IsPublic, Model.Instrument, Model.Skill, Model.GradeLevel));
+            Html.RenderPartial("TechniqueEdit", new TechniqueEdit(Model.TeacherId, Model.ResourceId, Model.Title, Model.Description, Model.IsDownloadable, Model.IsPublic, Model.Instrument, Model.Skill, Model.GradeLevel, Model.FileName));
             Html.RenderPartial("DeleteResource", new ResourceDelete(Model.ResourceId, Model.TeacherId, Model.Title, Model.Description, Model.DateCreated));
         }
     </div>
@@ -107,5 +128,21 @@ else
 
 
 @section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $('#TechniqueEdit').change(function () {
+            var i = $(this).prev('div').clone();
+            var file = $('#TechniqueEdit')[0].files[0].name;
+            $(this).prev('div').text(file);
+        });
+    </script>
+    <script>
+        const header = document.getElementById("update-header");
+        const input = document.getElementById("title-input");
 
+        input.addEventListener("keyup", function () {
+            var text = this.value
+            header.textContent = "Update " + text;
+        })
+    </script>
 }

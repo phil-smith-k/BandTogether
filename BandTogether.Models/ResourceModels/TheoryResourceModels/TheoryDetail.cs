@@ -13,7 +13,7 @@ namespace BandTogether.Models.ResourceModels.TheoryResourceModels
     {
         public TheoryDetail() { }
 
-        public TheoryDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string type, byte[] data, TheoryTopic topic, int gradeLevel)
+        public TheoryDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string type, byte[] data, string fileName, TheoryTopic topic, int gradeLevel)
         {
             this.ResourceId = resourceId;
             this.TeacherId = teacherId;
@@ -27,6 +27,7 @@ namespace BandTogether.Models.ResourceModels.TheoryResourceModels
             this.FileId = fileId;
             this.ContentType = type;
             this.FileData = data;
+            this.FileName = fileName;
             this.Topic = topic;
             this.GradeLevel = gradeLevel;
         }
@@ -48,6 +49,7 @@ namespace BandTogether.Models.ResourceModels.TheoryResourceModels
         public int FileId { get; set; }
         public string ContentType { get; set; }
         public byte[] FileData { get; set; }
+        public string FileName { get; set; }
 
         [Display(Name = "Grade Level")]
         public int GradeLevel { get; set; }

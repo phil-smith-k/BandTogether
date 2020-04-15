@@ -7,10 +7,10 @@
 
     <ul class="nav navbar-right ml-auto">
         <li>
-            @Html.ActionLink("Explore", "NewsFeed", "Resource", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Home", "NewsFeed", "Resource", null, new { @class = "btn btn-default" })
         </li>
         <li>
-            @Html.ActionLink("Find", "Index", "Teacher", null, new { @class = "btn btn-default" })
+            @Html.ActionLink("Find Teachers", "Index", "Teacher", null, new { @class = "btn btn-default" })
         </li>
         <li>
             @Html.ActionLink("My Profile", "Detail", "Teacher", routeValues: new { id = User.Identity.GetUserId() }, htmlAttributes: new { title = "View Profile", @class = "btn btn-default" })
@@ -24,7 +24,7 @@
 else
 {
     <ul class="nav navbar-right ml-auto">
-        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Sign Up", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log In", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

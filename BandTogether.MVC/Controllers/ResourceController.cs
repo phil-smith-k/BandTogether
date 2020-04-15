@@ -15,6 +15,7 @@ namespace BandTogether.MVC.Controllers
     [Authorize]
     public class ResourceController : Controller
     {
+        [HttpGet]
         public ActionResult NewsFeed()
         {
             var service = CreateResourceService();
@@ -22,11 +23,6 @@ namespace BandTogether.MVC.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public ActionResult CreateTechnique()
-        {
-            return View();
-        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateTechnique(TechniqueCreate model)
@@ -36,12 +32,13 @@ namespace BandTogether.MVC.Controllers
                 var service = CreateResourceService();
                 if (service.CreateResource(model))
                 {
-                    return RedirectToAction("Index", "Home");
+                    TempData["SaveResult"] = "Resource was successfully published.";
+                    return RedirectToAction("Detail", "Teacher", new { id = this.User.Identity.GetUserId() });
                 }
                 else
                 {
-                    this.ModelState.AddModelError("", "Resource could not be uploaded.");
-                    return View(model);
+                    TempData["ErrorMessage"] = "Resource could not be added. Try again later.";
+                    return RedirectToAction("Detail", "Teacher", new { id = this.User.Identity.GetUserId() });
                 }
             }
             else
@@ -50,11 +47,6 @@ namespace BandTogether.MVC.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult CreateEnsemble()
-        {
-            return View();
-        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateEnsemble(EnsembleCreate model)
@@ -64,12 +56,13 @@ namespace BandTogether.MVC.Controllers
                 var service = CreateResourceService();
                 if (service.CreateResource(model))
                 {
-                    return RedirectToAction("Index", "Home");
+                    TempData["SaveResult"] = "Resource was successfully published.";
+                    return RedirectToAction("Detail", "Teacher", new { id = this.User.Identity.GetUserId() });
                 }
                 else
                 {
-                    this.ModelState.AddModelError("", "Resource could not be uploaded.");
-                    return View(model);
+                    TempData["ErrorMessage"] = "Resource could not be added. Try again later.";
+                    return RedirectToAction("Detail", "Teacher", new { id = this.User.Identity.GetUserId() });
                 }
             }
             else
@@ -78,11 +71,6 @@ namespace BandTogether.MVC.Controllers
             }
         }
 
-        [HttpGet]
-        public ActionResult CreateTheory()
-        {
-            return View();
-        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult CreateTheory(TheoryCreate model)
@@ -92,12 +80,13 @@ namespace BandTogether.MVC.Controllers
                 var service = CreateResourceService();
                 if (service.CreateResource(model))
                 {
-                    return RedirectToAction("Index", "Home");
+                    TempData["SaveResult"] = "Resource was successfully published.";
+                    return RedirectToAction("Detail", "Teacher", new { id = this.User.Identity.GetUserId() });
                 }
                 else
                 {
-                    this.ModelState.AddModelError("", "Resource could not be uploaded.");
-                    return View(model);
+                    TempData["ErrorMessage"] = "Resource could not be added. Try again later.";
+                    return RedirectToAction("Detail", "Teacher", new { id = this.User.Identity.GetUserId() });
                 }
             }
             else
@@ -115,41 +104,52 @@ namespace BandTogether.MVC.Controllers
             return File(file.Data, file.ContentType);
         }
 
+        [HttpPost]
         public ActionResult EditTechnique(TechniqueEdit model)
         {
             var service = CreateResourceService();
             if (service.UpdateResource(model))
             {
+                TempData["SaveResult"] = "Resource was successfully updated.";
                 return RedirectToAction("Detail", new { id = model.ResourceId });
             }
             else
             {
+                TempData["ErrorMessage"] = "Resource could not be updated. Try again later.";
                 return RedirectToAction("Detail", new { id = model.ResourceId });
             }
 
         }
+
+        [HttpPost]
         public ActionResult EditEnsemble(EnsembleEdit model)
         {
             var service = CreateResourceService();
             if (service.UpdateResource(model))
             {
+                TempData["SaveResult"] = "Resource was successfully updated.";
                 return RedirectToAction("Detail", new { id = model.ResourceId });
             }
             else
             {
+                TempData["ErrorMessage"] = "Resource could not be updated. Try again later.";
                 return RedirectToAction("Detail", new { id = model.ResourceId });
             }
 
         }
+
+        [HttpPost]
         public ActionResult EditTheory(TheoryEdit model)
         {
             var service = CreateResourceService();
             if (service.UpdateResource(model))
             {
+                TempData["SaveResult"] = "Resource was successfully updated.";
                 return RedirectToAction("Detail", new { id = model.ResourceId });
             }
             else
             {
+                TempData["ErrorMessage"] = "Resource could not be updated. Try again later.";
                 return RedirectToAction("Detail", new { id = model.ResourceId });
             }
 

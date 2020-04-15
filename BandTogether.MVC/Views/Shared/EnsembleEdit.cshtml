@@ -5,13 +5,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h6>Update @Html.DisplayFor(model => model.Title)</h6>
+                <h6 id="update-header">Update @Html.DisplayFor(model => model.Title)</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("EnsembleEdit", "Resource", new { id = Model.TeacherId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+                @using (Html.BeginForm("EditEnsemble", "Resource", new { id = Model.TeacherId }, FormMethod.Post, new { enctype = "multipart/form-data" }))
                 {
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(model => model.ResourceId)
@@ -20,7 +20,7 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             <div class="">
-                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Title" } })
+                                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", placeholder = "Title", id="title-input" } })
                                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
                             </div>
                         </div>
@@ -64,11 +64,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="">
-                                <label for="File" class="btn unfollow-btn mt-3 ml-4 mb-3" style="display: block;">
+                            <div class="d-flex justify-content-around">
+                                <label for="EnsembleEdit" class="btn unfollow-btn mt-3 ml-4 mb-3">
                                     Browse
                                 </label>
-                                <input type="file" id="File" name="File" value="File" />
+                                <div class="border mt-3 ml-4 mb-3 pl-3 pt-1" id="file-name-text">
+                                    @Html.DisplayFor(model => model.FileName)
+                                </div>
+                                <input type="file" id="EnsembleEdit" name="File" value="File" />
+                                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
@@ -88,7 +92,6 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         function onChangeSuccess(data) {
-
             if (data.status === "success") {
                 $("#modalcontent").modal('hide');
                 $("#message-area").html(data.view);

@@ -38,7 +38,13 @@ namespace BandTogether.Services
             using (var ctx = new ApplicationDbContext())
             {
                 var entity = ctx.Teachers.Find(teacherId);
-                return _teacherHelper.GetTeacherDetailModel(entity);
+
+                if (entity != null)
+                {
+                    return _teacherHelper.GetTeacherDetailModel(entity);
+                }
+                else
+                    throw new InvalidOperationException();
             }
         }
         public EditProfileName GetProfileName(string teacherId)

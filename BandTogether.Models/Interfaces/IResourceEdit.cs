@@ -16,5 +16,6 @@ namespace BandTogether.Models.Interfaces
         bool IsDownloadable { get; set; }
         bool IsPublic { get; set; }
         HttpPostedFileBase File { get; set; }
+        string FileName { get; set; }
     }
 }

@@ -87,8 +87,13 @@ namespace BandTogether.Services
 
                 if (entity != null)
                 {
-                    _resourceHelper.UpdateResourceEntity(model, entity);
-                    return ctx.SaveChanges() == 2;
+                    if (_resourceHelper.UpdateResourceEntity(model, entity))
+                    {
+                        var numberOfChanges = ctx.SaveChanges();
+                        return numberOfChanges == 4;
+                    }
+                    else
+                        return ctx.SaveChanges() == 1;
                 }
                 return false;
             }

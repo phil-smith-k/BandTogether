@@ -288,3 +288,37 @@ iframe{
     width: 100%;
     border-radius: 15px;
 }
+#file-name-text {
+    height: 2em; 
+    width: 50%; 
+    border-radius: 10px;
+    font-size: 15px;
+    overflow: hidden;
+}
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 2px solid #3d59a8;
+}
+.custom-control-input {
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    width: 1.6rem;
+    height: 1.85rem;
+    opacity: 0;
+}
+
+.custom-control-input:checked ~ .custom-control-label::before {
+    color: #fff;
+    border-color: #3d59a8;
+    background-color: #3d59a8;
+}
+.custom-control-input:focus ~ .custom-control-label::before {
+    box-shadow: none;
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+    border-color: transparent;
+}

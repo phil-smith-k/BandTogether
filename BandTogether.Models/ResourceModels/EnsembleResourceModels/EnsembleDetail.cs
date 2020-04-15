@@ -13,7 +13,7 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
     {
         public EnsembleDetail() { }
 
-        public EnsembleDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string type, byte[] data, MusicalSkill skill, EnsembleType ensemble, int gradeLevel)
+        public EnsembleDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string type, byte[] data, string fileName, MusicalSkill skill, EnsembleType ensemble, int gradeLevel)
         {
             this.ResourceId = resourceId;
             this.TeacherId = teacherId;
@@ -27,6 +27,7 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
             this.FileId = fileId;
             this.ContentType = type;
             this.FileData = data;
+            this.FileName = fileName;
             this.Skill = skill;
             this.Ensemble = ensemble;
             this.GradeLevel = gradeLevel;
@@ -49,8 +50,11 @@ namespace BandTogether.Models.ResourceModels.EnsembleResourceModels
         public int FileId { get; set; }
         public string ContentType { get; set; }
         public byte[] FileData { get; set; }
+        public string FileName { get; set; }
         public MusicalSkill Skill { get; set; }
         public EnsembleType Ensemble { get; set; }
+
+        [Display(Name = "Grade Level")]
         public int GradeLevel { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace BandTogether.Models.ResourceModels.TechniqueResourceModels
     {
         public TechniqueDetail() { }
 
-        public TechniqueDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string content, byte[] data, MusicalSkill skill, Instrument instrument, int gradeLevel)
+        public TechniqueDetail(int resourceId, string teacherId, string name, string title, string description, DateTimeOffset created, DateTimeOffset? modified, bool isDownloadable, bool isPublic, int fileId, string content, byte[] data, string fileName, MusicalSkill skill, Instrument instrument, int gradeLevel)
         {
             this.ResourceId = resourceId;
             this.TeacherId = teacherId;
@@ -28,6 +28,7 @@ namespace BandTogether.Models.ResourceModels.TechniqueResourceModels
             this.FileId = fileId;
             this.ContentType = content;
             this.FileData = data;
+            this.FileName = fileName;
             this.Skill = skill;
             this.Instrument = instrument;
             this.GradeLevel = gradeLevel;
@@ -50,6 +51,7 @@ namespace BandTogether.Models.ResourceModels.TechniqueResourceModels
         public int FileId { get; set; }
         public string ContentType { get; set; }
         public byte[] FileData { get; set; }
+        public string FileName { get; set; }
 
         [EnumDataType(typeof(MusicalSkill))]
         public MusicalSkill Skill { get; set; }

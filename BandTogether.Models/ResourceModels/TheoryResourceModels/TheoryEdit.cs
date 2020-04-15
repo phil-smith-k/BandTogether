@@ -14,7 +14,7 @@ namespace BandTogether.Models.ResourceModels.TheoryResourceModels
     {
         public TheoryEdit() { }
 
-        public TheoryEdit(string teacherId, int resourceId, string title, string description, bool isDownloadable, bool isPublic, TheoryTopic topic, int level)
+        public TheoryEdit(string teacherId, int resourceId, string title, string description, bool isDownloadable, bool isPublic, TheoryTopic topic, int level, string fileName)
         {
             this.TeacherId = teacherId;
             this.ResourceId = resourceId;
@@ -24,6 +24,7 @@ namespace BandTogether.Models.ResourceModels.TheoryResourceModels
             this.IsPublic = isPublic;
             this.Topic = topic;
             this.GradeLevel = level;
+            this.FileName = fileName;
         }
 
         public string TeacherId { get; set; }
@@ -55,5 +56,7 @@ namespace BandTogether.Models.ResourceModels.TheoryResourceModels
         [Display(Name = "File")]
         [DataType(DataType.Upload)]
         public HttpPostedFileBase File { get; set; }
+
+        public string FileName { get; set; }
     }
 }
